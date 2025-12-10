@@ -17,26 +17,8 @@ class UserSeeder extends Seeder
         User::create([
             "name" => "Kunszt Norbi",
             "email" => "kunszt.norbert@gmail.com",
-            "role" => "admin",
             "password" => Hash::make("ushaeW3."),
         ]);
-        User::create([
-            "name" => "Gábor & Barbi",
-            "email" => "kunszt.norbert2@gmail.com",
-            "role" => "sales",
-            "password" => Hash::make("ushaeW3."),
-        ]);
-        User::create([
-            "name" => "Üzletkötő 1",
-            "email" => "atadcleankftdev@gmail.com",
-            "role" => "salesperson",
-            "password" => Hash::make("ushaeW3."),
-        ]);
-        User::create([
-            "name" => "Üzletkötő 2",
-            "email" => "atadcleankftdev2@gmail.com",
-            "role" => "salesperson",
-            "password" => Hash::make("ushaeW3."),
-        ]);
+        
     }
 }
