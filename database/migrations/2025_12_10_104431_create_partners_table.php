@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('tax')->nullable();
+            $table->string('country')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('state')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

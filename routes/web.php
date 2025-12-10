@@ -15,6 +15,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/import-partners', [App\Http\Controllers\ImportController::class, 'showPartnerImportForm'])->name('pages.import.partners');
+    Route::post('/import-partners', [App\Http\Controllers\ImportController::class, 'import'])->name('post.import.partners');
 });
 
 require __DIR__.'/auth.php';
