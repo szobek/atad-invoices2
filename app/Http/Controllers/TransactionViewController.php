@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transactions;
+use App\Models\Transaction;
 
 class TransactionViewController extends Controller
 {
     public function index()
     {
-        $transactions=Transactions::all();
+        $transactions=Transaction::all();
         return view('pages.transaction.index',compact('transactions'));
     }
 
