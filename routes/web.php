@@ -24,6 +24,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/transactions', [App\Http\Controllers\TransactionViewController::class, 'index'])
         ->middleware('role:admin')
         ->name('pages.transactions');
+        
+    Route::get('/transactions-to-partner', [App\Http\Controllers\TransactionController::class, 'connectPartnerToTransactionView'])
+        ->middleware('role:admin,sales')
+        ->name('pages.transactions-to-partner');
+        
+    Route::post('/transactions-to-partner', [App\Http\Controllers\TransactionController::class, 'connectPartnerToTransaction'])
+        ->middleware('role:admin,sales')
+        ->name('transactions-to-partner-save');
+
+
     Route::get('/transactions2', [App\Http\Controllers\TransactionViewController::class, 'index2'])
         ->middleware('role:admin,sales')
         ->name('pages.transactions2');
