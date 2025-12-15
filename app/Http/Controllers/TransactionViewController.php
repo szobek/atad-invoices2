@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Transactions;
 
 class TransactionViewController extends Controller
 {
     public function index()
     {
-        return view('transaction.index');
+        $transactions=Transactions::all();
+        return view('pages.transaction.index',compact('transactions'));
     }
 
     public function index2()
