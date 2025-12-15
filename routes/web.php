@@ -20,4 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/import-partners', [App\Http\Controllers\ImportController::class, 'import'])->name('post.import.partners');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/transactions', [App\Http\Controllers\TransactionViewController::class, 'index'])
+        ->middleware('role:admin')
+        ->name('pages.transactions');
+    Route::get('/transactions2', [App\Http\Controllers\TransactionViewController::class, 'index2'])
+        ->middleware('role:admin,sales')
+        ->name('pages.transactions2');
+});
+
 require __DIR__.'/auth.php';
