@@ -42,3 +42,8 @@ Route::get('/transactions-create', [TransactionController::class, 'transactionCr
 Route::post('/transactions-create', [TransactionController::class, 'createTransaction'])
     ->middleware('role:admin,sales')
     ->name('transactions-create');
+
+Route::get('/invoice/{szamlaszam}', [TransactionController::class, 'getInvoiceByNumber'])
+    ->middleware('role:admin,sales')
+    ->where('szamlaszam', '.*')
+    ->name('single-invoice');    

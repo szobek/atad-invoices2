@@ -61,4 +61,15 @@ class TransactionController extends Controller
             return redirect()->back()->with('error', 'Hiba történt a mentés során!');
         }
     }
+
+    public function getInvoiceByNumber( $szamlaszam)
+    {
+        $invoice = Transaction::where('num', $szamlaszam)->first();
+// dd($szamlaszam,$invoice);
+        if (!$invoice) {
+            return response()->json(['message' => 'Invoice not found'], 404);
+        }
+        return view('pages.transaction.single-invoice', compact('invoice'));
+    }
+
 }
