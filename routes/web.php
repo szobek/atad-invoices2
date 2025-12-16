@@ -1,21 +1,43 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     return view('pages.index');
 });
 
 Route::get('/dashboard', function () {
+
+    $stats = Transaction::select(
+        DB::raw("DATE_FORMAT(date, '%Y-%m') as honap"),
+        DB::raw("COUNT(*) as osszes_darab"),
+        DB::raw("CAST(SUM(CASE WHEN type = 'storno' THEN 1 ELSE 0 END) AS UNSIGNED) as storno_darab")
+    )
+    ->groupBy('honap')
+    ->orderBy('honap', 'desc')
+    ->get();
+    $darabok = [];
+    foreach ($stats as $sor) {
+        $szamla[] = $sor->osszes_darab;
+        $storno[]=$sor->storno_darab;
+    }
+    // dd($szamla,$storno);
+
     $transactions_data = [
-        "data"=>[10,20],
-        "stornos"=>[5,15],
+        "invoice" => $szamla,
+        "stornos" => $storno,
+        "lorem" => $szamla,
+        "start_date" => Carbon::parse(Transaction::first()->created_at)->format('Y.m.d'),
+        "end_date" => Carbon::parse(Transaction::find(Transaction::max('id'))->created_at)->format('Y.m.d'),
     ];
-    return view('pages.dashboard',compact('transactions_data'));
+    return view('pages.dashboard', compact('transactions_data'));
 })
-->middleware(['auth'])
-->name('pages.dashboard');
+    ->middleware(['auth'])
+    ->name('pages.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -25,6 +47,6 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__.'/auth.php';
-require __DIR__.'/transaction.php';
-require __DIR__.'/partner.php';
+require __DIR__ . '/auth.php';
+require __DIR__ . '/transaction.php';
+require __DIR__ . '/partner.php';

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             purple: 'rgb(153, 102, 255)',
             orange: 'rgb(255, 159, 64)',
         },
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        labels: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December']
     }
 
     const labels = Utils.labels;
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             
             {
                 label: 'lorem ipsum',
-                data: [5,10,15,20,25,30,35,40,45,50,55,60],
+                data: JSON.parse(ctx.dataset.lorem),
                 backgroundColor: Utils.CHART_COLORS.green,
             },
 
