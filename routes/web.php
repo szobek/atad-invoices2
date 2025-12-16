@@ -8,7 +8,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('pages.transaction.transaction-dashboard');
+    $transactions_data = [
+        "data"=>[10,20],
+        "stornos"=>[5,15],
+    ];
+    return view('pages.dashboard',compact('transactions_data'));
 })
 ->middleware(['auth'])
 ->name('pages.dashboard');
