@@ -36,6 +36,11 @@ class TransactionController extends Controller
         return redirect()->back();
     }
 
+    public function transactionCreateView()
+    {
+        return view('pages.transaction.create-invoice');
+    }
+
     public function createTransaction(Request $request)
     {
         $validatedData = $request->validate([

@@ -34,6 +34,11 @@ Route::post('/transactions-disconnect-partner', [TransactionController::class, '
     ->middleware('role:admin')
     ->name('transactions-disconnect-partner');
 
+
+Route::get('/transactions-create', [TransactionController::class, 'transactionCreateView'])
+    ->middleware('role:admin,sales')
+    ->name('pages.transactions-create');
+
 Route::post('/transactions-create', [TransactionController::class, 'createTransaction'])
     ->middleware('role:admin,sales')
     ->name('transactions-create');
