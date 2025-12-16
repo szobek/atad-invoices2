@@ -17,7 +17,11 @@
                         @foreach ($invoices as $invoice)
 
                         <tr>
-                            <td>{{ $invoice->num }}</td>
+                            <td>
+                                <a href="{{ route('single-invoice', $invoice->num) }}">
+                                    {{ $invoice->num }}
+                                </a>
+                            </td>
                             <td>{{ $invoice->date }}</td>
                             <td>{{ $invoice->type }}</td>
                             <td>{{ $invoice->pay_mode }}</td>
