@@ -60,6 +60,13 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="comment">Megjegyzés</label>
+                        <textarea name="comment" id="comment" class="@error('comment') is-invalid @enderror">{{ old('comment') }}</textarea>
+                        @error('comment')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="amount">Összeg</label>
                         <input type="number" name="amount" id="amount" step="100"
                             class="@error('amount') is-invalid @enderror" value="{{ old('amount') }}">

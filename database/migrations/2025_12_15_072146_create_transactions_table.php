@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('type')->default('normal');
             $table->string('pay_mode');
             $table->decimal('amount', 15, 2)->default(0);
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

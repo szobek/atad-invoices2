@@ -48,13 +48,16 @@ class TransactionController extends Controller
             'date' => 'required|string|max:10',
             'pay_mode' => 'required|string|max:45',
             'amount' => 'required|numeric|min:0',
+            'comment' => 'nullable|string|max:255',
         ]);
         // dd($validatedData);
         try {
             Transaction::create([
                 'num' => $validatedData['num'],
                 'date' => $validatedData['date'],
-                'pay_mode' => $validatedData['pay_mode']
+                'pay_mode' => $validatedData['pay_mode'],
+                'amount' => $validatedData['amount'],
+                'comment' => $validatedData['comment'] ?? null,
             ]);
             return redirect()->back()->with('saved', 'A számla mentve!');
         } catch (\Exception $e) {
