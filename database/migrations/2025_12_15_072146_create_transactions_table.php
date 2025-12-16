@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('num');
-            $table->string('date');
+            $table->date('date');
+            $table->string('type')->default('normal');
             $table->string('pay_mode');
             $table->decimal('amount', 15, 2)->default(0);
             $table->timestamps();
