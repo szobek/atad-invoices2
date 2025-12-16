@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('num');
             $table->string('date');
             $table->string('pay_mode');
+            $table->decimal('amount', 15, 2)->default(0);
             $table->timestamps();
         });
     }

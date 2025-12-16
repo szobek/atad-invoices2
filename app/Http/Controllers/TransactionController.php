@@ -27,4 +27,33 @@ class TransactionController extends Controller
         ]);
         return redirect()->back();
     }
+
+    public function disconnectPartnerFromTransaction(Request $request)
+    {
+        TransactionPartner::where('partner_id', $request->partner_id)
+            ->where('transaction_id', $request->transaction_id)
+            ->delete();
+        return redirect()->back();
+    }
+
+    public function createTransaction(Request $request)
+    {
+        $validatedData = $request->validate([
+            'num' => 'required|string|max:15',
+            'date' => 'required|string|max:10',
+            'pay_mode' => 'required|string|max:45',
+            'amount' => 'required|numeric|min:0',
+        ]);
+        // dd($validatedData);
+        try {
+            Transaction::create([
+                'num' => $validatedData['num'],
+                'date' => $validatedData['date'],
+                'pay_mode' => $validatedData['pay_mode']
+            ]);
+            return redirect()->back()->with('saved', 'A számla mentve!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Hiba történt a mentés során!');
+        }
+    }
 }
