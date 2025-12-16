@@ -1,0 +1,6 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PartnerController;
+
+Route::get('/partners', [PartnerController::class, 'allPartnerView'])->name('pages.all-partners');
