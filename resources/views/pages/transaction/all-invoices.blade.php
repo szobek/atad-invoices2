@@ -7,14 +7,20 @@
                         <tr>
                             <th>Számlaszám</th>
                             <th>Dátum</th>
+                            <th>Típus</th>
+                            <th>Fizetési mód</th>
+                            <th>Összeg</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($transactions as $transaction)
+                        @foreach ($invoices as $invoice)
 
                         <tr>
-                            <td>{{ $transaction->num }}</td>
-                            <td>{{ $transaction->date }}</td>
+                            <td>{{ $invoice->num }}</td>
+                            <td>{{ $invoice->date }}</td>
+                            <td>{{ $invoice->type }}</td>
+                            <td>{{ $invoice->pay_mode }}</td>
+                            <td>{{ number_format($invoice->amount, 2, ',', ' ') }} Ft</td>
                         </tr>
                         @endforeach
                     </tbody>

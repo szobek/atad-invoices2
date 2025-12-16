@@ -47,3 +47,7 @@ Route::get('/invoice/{szamlaszam}', [TransactionController::class, 'getInvoiceBy
     ->middleware('role:admin,sales')
     ->where('szamlaszam', '.*')
     ->name('single-invoice');    
+    
+Route::get('/invoices', [TransactionController::class, 'allInvoices'])
+    ->middleware('role:admin,sales')
+    ->name('pages.all-invoices');    

@@ -72,4 +72,10 @@ class TransactionController extends Controller
         return view('pages.transaction.single-invoice', compact('invoice'));
     }
 
+    public function allInvoices()
+    {
+        $invoices = Transaction::all();
+        return view('pages.transaction.all-invoices', compact('invoices'));
+    }
+
 }
