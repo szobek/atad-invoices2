@@ -10,6 +10,7 @@
                             <th>Típus</th>
                             <th>Fizetési mód</th>
                             <th>Összeg</th>
+                            <th>Megjegyzés</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,6 +22,7 @@
                             <td>{{ $invoice->type }}</td>
                             <td>{{ $invoice->pay_mode }}</td>
                             <td>{{ number_format($invoice->amount, 2, ',', ' ') }} Ft</td>
+                            <td>{{ $invoice->comment }}</td>
                         </tr>
                         @endforeach
                     </tbody>
