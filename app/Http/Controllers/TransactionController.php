@@ -67,12 +67,13 @@ class TransactionController extends Controller
 
     public function getInvoiceByNumber( $szamlaszam)
     {
-        $invoice = Transaction::where('num', $szamlaszam)->first();
-// dd($szamlaszam,$invoice);
+        $invoice = Transaction::where('num', $szamlaszam)->with('partners')->first();
+        $partner=$invoice->partners->first();
+// dd($szamlaszam,$invoice,$partner);
         if (!$invoice) {
             return response()->json(['message' => 'Invoice not found'], 404);
         }
-        return view('pages.transaction.single-invoice', compact('invoice'));
+        return view('pages.transaction.single-invoice', compact('invoice','partner'));
     }
 
     public function allInvoices()

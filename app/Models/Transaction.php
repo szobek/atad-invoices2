@@ -10,4 +10,8 @@ class Transaction extends Model
     protected $fillable = [
         'num','date','pay_mode'
     ];
+    public function partners()
+    {
+        return $this->belongsToMany(Partner::class, 'transaction_partners', 'transaction_id', 'partner_id');
+    }
 }
