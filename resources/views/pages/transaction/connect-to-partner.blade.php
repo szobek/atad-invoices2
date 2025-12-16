@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Számla partnerhez rendelése">
     <form action="{{ route('transactions-to-partner-save') }}" method="post">
         @csrf
         <select name="partner_id" id="">
