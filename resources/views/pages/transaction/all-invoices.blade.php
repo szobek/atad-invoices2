@@ -16,7 +16,7 @@
                     <tbody>
                         @foreach ($invoices as $invoice)
 
-                        <tr>
+                        <tr class="@if($invoice->type=="storno") bg-red @endif">
                             <td>
                                 <a href="{{ route('single-invoice', $invoice->num) }}">
                                     {{ $invoice->num }}

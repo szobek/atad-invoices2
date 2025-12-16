@@ -1,1 +1,9 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+.bg-red {
+    --bs-table-bg: #bb5858; 
+    --bs-table-color: white; 
+}
+a {
+    color: inherit;
+}

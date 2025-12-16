@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
         ]);
+        Transaction::truncate();
         Transaction::factory(10)->create();
     }
 }
