@@ -6,7 +6,7 @@
                 <p>Dátum: {{ $invoice->date }}</p>
                 <p>típus: {{ $invoice->type }}</p>
                 <p>Fizetési mód: {{ $invoice->pay_mode }}</p>
-                <p>Összeg: {{ $invoice->amount }}</p>
+                <p>Összeg: {{ number_format($invoice->amount, 2, ',', ' ') }} Ft</p>
             </div>
         </div>
     </div>
