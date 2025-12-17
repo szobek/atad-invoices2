@@ -21,11 +21,20 @@ class TransactionController extends Controller
     public function connectPartnerToTransaction(Request $request)
     {
         // dd($request->partner_id,$request->transaction_id);
-        TransactionPartner::create([
-            'partner_id' => $request->partner_id,
-            'transaction_id' => $request->transaction_id
+        $validateData = $request->validate([
+            "partner_id" => 'required',
+            "transaction_id" => 'required'
         ]);
-        return redirect()->back();
+
+        try {
+            TransactionPartner::create([
+                'partner_id' => $validateData["partner_id"],
+                'transaction_id' => $validateData["transaction_id"]
+            ]);
+            return redirect()->back()->with('saved', 'A kapcsolat mentve!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Hiba történt a mentés során!');
+        }
     }
 
     public function disconnectPartnerFromTransaction(Request $request)
@@ -65,15 +74,15 @@ class TransactionController extends Controller
         }
     }
 
-    public function getInvoiceByNumber( $szamlaszam)
+    public function getInvoiceByNumber($szamlaszam)
     {
         $invoice = Transaction::where('num', $szamlaszam)->with('partners')->first();
-        $partner=$invoice->partners->first();
-// dd($szamlaszam,$invoice,$partner);
+        $partner = $invoice->partners->first();
+        // dd($szamlaszam,$invoice,$partner);
         if (!$invoice) {
             return response()->json(['message' => 'Invoice not found'], 404);
         }
-        return view('pages.transaction.single-invoice', compact('invoice','partner'));
+        return view('pages.transaction.single-invoice', compact('invoice', 'partner'));
     }
 
     public function allInvoices()
@@ -81,5 +90,4 @@ class TransactionController extends Controller
         $invoices = Transaction::all();
         return view('pages.transaction.all-invoices', compact('invoices'));
     }
-
 }
