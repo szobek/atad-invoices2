@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-primary " data-bs-theme="dark">
-  <div class="container-fluid">
+  <div class="container">
     <a class="navbar-brand" href="/">
       <x-application-logo height="30" />
     </a>
@@ -12,27 +12,34 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ route('pages.dashboard') }}">Dashboard</a>
         </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Számlák
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ route('pages.all-invoices') }}">Minden számla</a></li>
-            <li><a class="dropdown-item" href="{{ route('pages.transactions-create') }}">Új számla</a></li>
-            <li><a class="dropdown-item" href="{{ route('pages.transactions-to-partner') }}">Számla partnerhez
-                rendelés</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ route('pages.all-partners') }}">Partnerek</a>
-        </li>
+        @if(Auth::user()->role == "admin" || Auth::user()->role == "sales")
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Számlák
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('pages.all-invoices') }}">Minden számla</a></li>
+              <li><a class="dropdown-item" href="{{ route('pages.transactions-create') }}">Új számla</a></li>
+              <li><a class="dropdown-item" href="{{ route('pages.transactions-to-partner') }}">Számla partnerhez
+                  rendelés</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Partnerek
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('pages.all-partners') }}">Minden partner</a></li>
+              <li><a class="dropdown-item" href="{{ route('pages.import.partners') }}">Partnerek importálása</a></li>
+            </ul>
+          </li>
+        @endif
       </ul>
       <div>
         <form action="/logout" method="post">
           @csrf
           <span>{{ Auth::user()->name }}</span>
-          <button type="submit">Kijelentkezés</button>
+          <button type="submit" class="btn btn-link">Kijelentkezés</button>
         </form>
 
       </div>
