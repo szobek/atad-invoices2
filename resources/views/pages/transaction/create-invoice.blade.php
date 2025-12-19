@@ -23,59 +23,75 @@
                 @endif
                 <form action="{{ route('transactions-create') }}" method="post">
                     @csrf
-                    <div class="form-group">
-                        <label for="num">Tranzakció szám</label>
-                        <input type="text" name="num" id="num" class="@error('num') is-invalid @enderror"
-                            value="{{ old('num') }}">
-                        @error('num')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="num">Tranzakció szám</label>
+                                <input type="text" name="num" id="num"
+                                    class="form-control @error('num') is-invalid @enderror" value="{{ old('num') }}">
+                                @error('num')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="date">Dátum</label>
+                                <input type="date" name="date" id="date"
+                                    class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}">
+                                @error('date')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="pay_mode">Fizetési mód</label>
+                                <select name="pay_mode" id="pay_mode"
+                                    class="form-control @error('pay_mode') is-invalid @enderror">
+                                    <option value="">Válassz...</option>
+                                    <option value="cash" {{ old('pay_mode') == 'cash' ? 'selected' : '' }}>
+                                        Készpénz
+                                    </option>
+                                    <option value="bank" {{ old('pay_mode') == 'bank' ? 'selected' : '' }}>
+                                        Banki átutalás
+                                    </option>
+                                    <option value="credit_card" {{ old('pay_mode') == 'credit_card' ? 'selected' : '' }}>
+                                        Bankkártya
+                                    </option>
+                                </select>
+                                @error('pay_mode')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
 
-                    <div class="form-group">
-                        <label for="date">Dátum</label>
-                        <input type="date" name="date" id="date" class="@error('date') is-invalid @enderror"
-                            value="{{ old('date') }}">
-                        @error('date')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                            <div class="mb-3">
+                                <label for="comment">Megjegyzés</label>
+                                <textarea name="comment" id="comment"
+                                    class="form-control @error('comment') is-invalid @enderror">{{ old('comment') }}</textarea>
+                                @error('comment')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="amount">Összeg</label>
+                                <input type="number" name="amount" id="amount" step="100"
+                                    class="form-control @error('amount') is-invalid @enderror"
+                                    value="{{ old('amount') }}">
+                                @error('amount')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Új Számla
+                                Létrehozása</button>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="pay_mode">Fizetési mód</label>
-                        <select name="pay_mode" id="pay_mode" class="@error('pay_mode') is-invalid @enderror">
-                            <option value="">Válassz...</option>
-                            <option value="cash" {{ old('pay_mode') == 'cash' ? 'selected' : '' }}>
-                                Készpénz
-                            </option>
-                            <option value="bank" {{ old('pay_mode') == 'bank' ? 'selected' : '' }}>
-                                Banki átutalás
-                            </option>
-                            <option value="credit_card" {{ old('pay_mode') == 'credit_card' ? 'selected' : '' }}>
-                                Bankkártya
-                            </option>
-                        </select>
-                        @error('pay_mode')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="comment">Megjegyzés</label>
-                        <textarea name="comment" id="comment" class="@error('comment') is-invalid @enderror">{{ old('comment') }}</textarea>
-                        @error('comment')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="amount">Összeg</label>
-                        <input type="number" name="amount" id="amount" step="100"
-                            class="@error('amount') is-invalid @enderror" value="{{ old('amount') }}">
-                        @error('amount')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <button type="submit" class="px-4 py-2 bg-blue-400 text-black rounded">Új Számla
-                        Létrehozása</button>
                 </form>
             </div>
         </div>
