@@ -36,11 +36,24 @@
         @endif
       </ul>
       <div>
-        <form action="/logout" method="post">
-          @csrf
-          <span>{{ Auth::user()->name }}</span>
-          <button type="submit" class="btn btn-link">Kijelentkezés</button>
-        </form>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ Auth::user()->name }}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profil</a></li>
+              <li>
+                <form action="/logout" method="post">
+                  @csrf
+                  <button type="submit" class="btn btn-link">Kijelentkezés</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
 
       </div>
 
