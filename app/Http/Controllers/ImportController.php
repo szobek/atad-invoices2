@@ -21,7 +21,6 @@ class ImportController extends Controller
         ]);
 
         try {
-            Partner::truncate(); // Régi adatok törlése az import előtt
             Excel::import(new PartnerImport, $validatedData['file']);
             return redirect()->back()->with('success', 'Import sikeres!');
         } catch (\Exception $e) {
