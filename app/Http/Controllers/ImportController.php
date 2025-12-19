@@ -16,13 +16,17 @@ class ImportController extends Controller
 
     public function import(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv|max:2048'
         ]);
 
-        Partner::truncate(); // Régi adatok törlése az import előtt
-        Excel::import(new PartnerImport, $request->file('file'));
+        try {
+            Partner::truncate(); // Régi adatok törlése az import előtt
+            Excel::import(new PartnerImport, $validatedData['file']);
+            return redirect()->back()->with('success', 'Import sikeres!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Hiba történt az importálás során: ' . $e->getMessage());
+        }
 
-        return redirect()->back()->with('success', 'Import sikeres!');
     }
 }
