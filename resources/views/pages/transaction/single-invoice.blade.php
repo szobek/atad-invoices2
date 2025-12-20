@@ -13,7 +13,7 @@
                 @if ($partner)
                     <p>Név: {{ $partner->name }}</p>
                     <p>Cím: {{ $partner->address }}</p>
-
+                    <a href="{{ route('pages.single-partner', $partner->id) }}">Partner számlái</a>
                 @else
                     <p>Nincs partner hozzárendelve.</p>
                 @endif

@@ -32,7 +32,7 @@ Route::middleware("role:admin,sales")->group(function () {
 
     Route::get('/invoice/{szamlaszam}', [TransactionController::class, 'getInvoiceByNumber'])
         ->where('szamlaszam', '.*')
-        ->name('single-invoice');
+        ->name('pages.single-invoice');
 
     Route::get('/invoices', [TransactionController::class, 'allInvoices'])
         ->name('pages.all-invoices');

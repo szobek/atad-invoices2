@@ -18,7 +18,7 @@
 
                         <tr class="@if($invoice->type=="storno") bg-red @endif">
                             <td>
-                                <a href="{{ route('single-invoice', $invoice->num) }}">
+                                <a href="{{ route('pages.single-invoice', $invoice->id) }}">
                                     {{ $invoice->num }}
                                 </a>
                             </td>

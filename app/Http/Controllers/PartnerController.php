@@ -20,6 +20,6 @@ class PartnerController extends Controller
             dd('Nincs ilyen partner');
         }
         $invoices=$partner->invoices;
-        return view("pages.transaction.single-partner-invoices",compact("invoices"));
+        return view("pages.transaction.single-partner",compact("invoices","partner"));
     }
 }
