@@ -11,7 +11,7 @@ class InvoiceController extends Controller
 {
     public function index()
     {
-        //
+        dd('invoices');
     }
     public function connectPartnerToTransactionView()
     {
@@ -73,16 +73,28 @@ class InvoiceController extends Controller
         }
     }
 
-    public function getInvoiceByNumber($szamlaszam)
+    public function getInvoiceByNumber($id)
     {
-        $invoice = Invoice::where('id', $szamlaszam)->first();
-        // dd($invoice);
-        $partner = $invoice->partner;
-        // dd($szamlaszam,$invoice,$partner);
+        $invoice = Invoice::where('id', $id)->first();
         if (!$invoice) {
             return response()->json(['message' => 'Invoice not found'], 404);
         }
+        $partner = $invoice->partner;
         return view('pages.invoice.single-invoice', compact('invoice', 'partner'));
+    }
+
+    public function deleteInvoice($id)
+    {
+        try {
+            $invoice = Invoice::where('id', $id)->first();
+            if ($invoice) {
+                $invoice->delete();
+            }
+            // dd($invoice);
+            return redirect("invoices");
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Hiba történt a törlés során!');
+        }
     }
 
     public function allInvoices()

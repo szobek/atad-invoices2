@@ -7,6 +7,19 @@
                 <p>típus: {{ $invoice->type }}</p>
                 <p>Fizetési mód: {{ $invoice->pay_mode }}</p>
                 <p>Összeg: {{ number_format($invoice->amount, 2, ',', ' ') }} Ft</p>
+                
+                @if(session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('error') }}
+                    </div>
+                @endif
+
+                <form action="{{ route('invoice.delete', $invoice->id) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Biztosan törölni szeretnéd a számlát?')">Számla törlése</button>
+                </form>
             </div>
             <div class="col-md-12">
                 <h3>Partner</h3>

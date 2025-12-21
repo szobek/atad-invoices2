@@ -13,7 +13,7 @@ Route::middleware("role:admin,sales")->group(function () {
 
     Route::post('/invoice-to-partner', [InvoiceController::class, 'connectPartnerToTransaction'])
         ->name('invoice-to-partner-save');
-    
+
     Route::post('/invoice-disconnect-partner', [InvoiceController::class, 'disconnectPartnerFromTransaction'])
         ->name('invoice-disconnect-partner');
 
@@ -24,9 +24,13 @@ Route::middleware("role:admin,sales")->group(function () {
     Route::post('/invoices-create', [InvoiceController::class, 'createInvoice'])
         ->name('invoices-create');
 
-    Route::get('/invoice/{szamlaszam}', [InvoiceController::class, 'getInvoiceByNumber'])
-        ->where('szamlaszam', '.*')
+    Route::get('/invoice/{id}', [InvoiceController::class, 'getInvoiceByNumber'])
+        ->where('id', '[0-9]+')
         ->name('pages.single-invoice');
+
+    Route::delete('/invoice/{id}', [InvoiceController::class, 'deleteInvoice'])
+        ->where('id', '[0-9]+')
+        ->name('invoice.delete');
 
     Route::get('/invoices', [InvoiceController::class, 'allInvoices'])
         ->name('pages.all-invoices');
