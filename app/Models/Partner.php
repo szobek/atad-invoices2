@@ -16,11 +16,9 @@ class Partner extends Model
     ];
     public function invoices()
     {
-        return $this->belongsToMany(
-            Transaction::class,     // Kivel kapcsolódik?
-            'transaction_partners', // Mi a köztes tábla?
-            'partner_id',           // Mi az ÉN azonosítóm a köztes táblában?
-            'transaction_id'        // Mi a MÁSIK azonosítója a köztes táblában?
-        );
+        return $this->belongsToMany(Invoice::class,
+        'transaction_partners', 
+        'partner_id', 
+        'transaction_id');
     }
 }

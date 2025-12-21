@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Transaction;
+use App\Models\Invoice;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Validation\Rules\In;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,8 +18,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
+            PartnerSeeder::class,
         ]);
-        Transaction::truncate();
-        Transaction::factory(10)->create();
+        Invoice::truncate();
+        Invoice::factory(10)->create();
     }
 }

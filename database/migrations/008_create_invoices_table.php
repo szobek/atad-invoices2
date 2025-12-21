@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('num');
             $table->date('date');
             $table->string('type')->default('normal');
             $table->string('pay_mode');
             $table->decimal('amount', 15, 2)->default(0);
+            $table->foreignId('partner_id')->nullable()->constrained();
             $table->text('comment')->nullable();
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('invoices');
     }
 };

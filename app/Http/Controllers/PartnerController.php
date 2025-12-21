@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Partner;
+use App\Models\Invoice;
 
 class PartnerController extends Controller
 {
@@ -12,14 +13,14 @@ class PartnerController extends Controller
         return view('pages.partner.all', compact('partners'));
     }
 
-    public function getInvoiceByPartner($id)
+    public function showPartner($id)
     {
-        $partner = Partner::with('invoices')->find($id);
+        $partner = Partner::find($id);
 
         if (!$partner) {
             dd('Nincs ilyen partner');
         }
-        $invoices=$partner->invoices;
-        return view("pages.transaction.single-partner",compact("invoices","partner"));
+        $invoices=Invoice::where('partner_id',$id)->get();
+        return view("pages.partner.single-partner",compact("invoices","partner"));
     }
 }

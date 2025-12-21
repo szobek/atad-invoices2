@@ -10,7 +10,7 @@ Route::middleware("role:admin,sales")->group(function () {
     Route::get('/partners', [PartnerController::class, 'allPartnerView'])
         ->name('pages.all-partners');
 
-    Route::get('/partner/{id}', [PartnerController::class, 'getInvoiceByPartner'])
+    Route::get('/partner/{id}', [PartnerController::class, 'showPartner'])
         ->name('pages.single-partner');
 
     Route::get('/import-partners', [ImportController::class, 'showPartnerImportForm'])

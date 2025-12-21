@@ -4,18 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class Invoice extends Model
 {
     use \Illuminate\Database\Eloquent\Factories\HasFactory;
     protected $fillable = [
-        'num','date','pay_mode'
+        'num',
+        'date',
+        'pay_mode',
+        'partner_id',
+        'amount',
+        'comment',
     ];
+
     public function partner()
     {
-        return $this->belongsTo(
-            Partner::class,
-            'partner_id',
-            'id'
-        );
+        return $this->belongsTo(Partner::class);
     }
 }

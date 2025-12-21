@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Models\Transaction;
+use App\Models\Invoice;
 use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
 
-    $stats = Transaction::select(
+    $stats = Invoice::select(
         DB::raw("DATE_FORMAT(date, '%Y-%m') as honap"),
         DB::raw("COUNT(*) as osszes_darab"),
         DB::raw("CAST(SUM(CASE WHEN type = 'storno' THEN 1 ELSE 0 END) AS UNSIGNED) as storno_darab")
@@ -31,8 +31,8 @@ Route::get('/dashboard', function () {
         "invoice" => $szamla,
         "stornos" => $storno,
         "lorem" => $szamla,
-        "start_date" => Carbon::parse(Transaction::first()->created_at)->format('Y.m.d'),
-        "end_date" => Carbon::parse(Transaction::find(Transaction::max('id'))->created_at)->format('Y.m.d'),
+        "start_date" => Carbon::parse(Invoice::first()->created_at)->format('Y.m.d'),
+        "end_date" => Carbon::parse(Invoice::find(Invoice::max('id'))->created_at)->format('Y.m.d'),
     ];
     return view('pages.dashboard', compact('transactions_data'));
 })
@@ -48,5 +48,5 @@ Route::middleware('auth')->group(function () {
 
 
 require __DIR__ . '/auth.php';
-require __DIR__ . '/transaction.php';
+require __DIR__ . '/invoice.php';
 require __DIR__ . '/partner.php';

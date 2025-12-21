@@ -19,8 +19,8 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{ route('pages.all-invoices') }}">Minden számla</a></li>
-              <li><a class="dropdown-item" href="{{ route('pages.transactions-create') }}">Új számla</a></li>
-              <li><a class="dropdown-item" href="{{ route('pages.transactions-to-partner') }}">Számla partnerhez
+              <li><a class="dropdown-item" href="{{ route('pages.invoices-create') }}">Új számla</a></li>
+              <li><a class="dropdown-item" href="{{ route('pages.invoices-to-partner') }}">Számla partnerhez
                   rendelés</a></li>
             </ul>
           </li>

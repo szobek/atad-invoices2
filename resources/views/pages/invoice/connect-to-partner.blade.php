@@ -11,7 +11,7 @@
         </div>
     @endif
     <div class="container mt-4">
-        <form action="{{ route('transactions-to-partner-save') }}" method="post">
+        <form action="{{ route('invoice-to-partner-save') }}" method="post">
             @csrf
             <div class="row">
 

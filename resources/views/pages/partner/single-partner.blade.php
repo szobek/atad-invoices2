@@ -17,7 +17,7 @@
                                 <tr>
                                     <td><a href="{{ route('pages.single-invoice', $invoice->id) }}">{{ $invoice->num }}</a></td>
                                     <td style="padding-left: 20px;">Dátum: {{ $invoice->date }}</td>
-                                    <td style="padding-left: 20px;">Összeg: {{ number_format($invoice->total_amount, 2) }} {{ $invoice->currency }}</td>
+                                    <td style="padding-left: 20px;">Összeg: {{ number_format($invoice->amount, 2) }} {{ $invoice->currency }}</td>
                                 </tr>
                             @endforeach
                         </table>

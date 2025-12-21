@@ -21,7 +21,7 @@
                         {{ session('saved') }}
                     </div>
                 @endif
-                <form action="{{ route('transactions-create') }}" method="post">
+                <form action="{{ route('invoices-create') }}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-md-4">
