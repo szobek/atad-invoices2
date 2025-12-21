@@ -42,4 +42,37 @@ class PartnerController extends Controller
 
         return redirect()->route('pages.all-partners')->with('success', 'Partner sikeresen törölve.');
     }
+
+    public function editPartnerView($id)
+    {
+        $partner = Partner::find($id);
+
+        if (!$partner) {
+            return redirect()->back()->with('error', 'Nincs ilyen partner');
+        }
+
+        return view('pages.partner.edit', compact('partner'));
+    }
+
+    public function editPartner($id)
+    {
+        $partner = Partner::find($id);
+
+        if (!$partner) {
+            return redirect()->back()->with('error', 'Nincs ilyen partner');
+        }
+
+        $data = request()->validate([
+            'name' => 'required|string|max:255',
+            'tax' => 'nullable|string|max:50',
+            'country' => 'nullable|string|max:100',
+            'zip' => 'nullable|string|max:20',
+            'state' => 'nullable|string|max:100',
+            'address' => 'nullable|string|max:255',
+        ]);
+
+        $partner->update($data);
+
+        return redirect()->route('pages.single-partner', $partner->id)->with('success', 'Partner sikeresen frissítve.');
+    }
 }
