@@ -18,6 +18,10 @@ Route::middleware("role:admin,sales")->group(function () {
 
     Route::post('/import-partners', [ImportController::class, 'import'])
         ->name('post.import.partners');
+
+    Route::delete('/partner/{id}', [PartnerController::class, 'deletePartner'])
+        ->where('id', '[0-9]+')
+        ->name('partner.delete');
 });
 
 Route::get("/partner-connect", function () {

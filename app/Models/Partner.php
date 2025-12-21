@@ -14,11 +14,5 @@ class Partner extends Model
         'state',
         'address',
     ];
-    public function invoices()
-    {
-        return $this->belongsToMany(Invoice::class,
-        'transaction_partners', 
-        'partner_id', 
-        'transaction_id');
-    }
+   
 }

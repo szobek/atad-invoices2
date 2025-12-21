@@ -1,6 +1,11 @@
 <x-app-layout>
     <div class="container">
         <div class="row">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <h2>Összes partner</h2>
             <div class="col-md-12 d-flex gap-4 flex-wrap">
                 @foreach ($partners as $partner)

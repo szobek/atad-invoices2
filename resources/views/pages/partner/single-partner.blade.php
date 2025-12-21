@@ -2,6 +2,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h3>Partner adatok</h3>
@@ -9,6 +14,11 @@
                     <div class="card-body">
                         <p>Név: {{ $partner->name }}</p>
                         <p>Cím: {{ $partner->zip }} {{ $partner->state }}, {{ $partner->address }} </p>
+                        <form action="{{ route('partner.delete', $partner->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Biztosan törölni szeretnéd a partnert?')">Partner törlése</button>
                         <p>Partner számlái</p>
                         <hr>
                         <table>
