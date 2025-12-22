@@ -27,9 +27,15 @@ Route::middleware("role:admin,sales")->group(function () {
         ->where('id', '[0-9]+')
         ->name('partner.edit');
 
-        Route::patch('/partner/{id}/edit', [PartnerController::class, 'editPartner'])
-            ->where('id', '[0-9]+')
-            ->name('partner.update');
+    Route::patch('/partner/{id}/edit', [PartnerController::class, 'editPartner'])
+        ->where('id', '[0-9]+')
+        ->name('partner.update');
+
+    Route::get('/partner-create', [PartnerController::class, 'createPartnerView'])
+        ->name('pages.create-partner');
+    Route::post('/partner-create', [PartnerController::class, 'createPartner'])
+        ->name('post.create-partner');
+        
 });
 
 Route::get("/partner-connect", function () {

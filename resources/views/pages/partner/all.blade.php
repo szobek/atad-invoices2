@@ -1,6 +1,9 @@
 <x-app-layout>
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <a href="{{ route('pages.create-partner') }}" class="btn btn-primary my-3">Új partner hozzáadása</a>
+            </div>
             @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}

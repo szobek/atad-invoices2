@@ -20,8 +20,8 @@ class PartnerController extends Controller
         if (!$partner) {
             dd('Nincs ilyen partner');
         }
-        $invoices=Invoice::where('partner_id',$id)->get();
-        return view("pages.partner.single-partner",compact("invoices","partner"));
+        $invoices = Invoice::where('partner_id', $id)->get();
+        return view("pages.partner.single-partner", compact("invoices", "partner"));
     }
 
     public function deletePartner($id)
@@ -74,5 +74,28 @@ class PartnerController extends Controller
         $partner->update($data);
 
         return redirect()->route('pages.single-partner', $partner->id)->with('success', 'Partner sikeresen frissítve.');
+    }
+
+    public function createPartnerView()
+    {
+        return view('pages.partner.create');
+    }
+
+    public function createPartner()
+    {
+        $data = request()->validate([
+            'name' => 'required|string|max:255',
+            'tax' => 'nullable|string|max:50',
+            'zip' => 'required|string|max:20',
+            'state' => 'required|string|max:100',
+            'address' => 'required|string|max:255',
+        ]);
+        try {
+
+            $partner = Partner::create($data);
+            return redirect()->route('pages.single-partner', $partner->id)->with('success', 'Partner sikeresen létrehozva.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Hiba történt a partner létrehozásakor: ' . $th->getMessage());
+        }
     }
 }
