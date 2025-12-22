@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Invoice;
+use App\Models\Partner;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Validation\Rules\In;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,11 +17,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        Invoice::truncate();
+        Partner::truncate();
+         DB::statement('SET FOREIGN_KEY_CHECKS=1');
         $this->call([
             UserSeeder::class,
-            PartnerSeeder::class,
         ]);
-        Invoice::truncate();
         Invoice::factory(10)->create();
+        Partner::factory(1000)->create();
     }
 }
