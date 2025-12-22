@@ -53,7 +53,7 @@
                                     <option value="cash" {{ old('pay_mode') == 'cash' ? 'selected' : '' }}>
                                         Készpénz
                                     </option>
-                                    <option value="bank" {{ old('pay_mode') == 'bank' ? 'selected' : '' }}>
+                                    <option value="bank_transfer" {{ old('pay_mode') == 'bank' ? 'selected' : '' }}>
                                         Banki átutalás
                                     </option>
                                     <option value="credit_card" {{ old('pay_mode') == 'credit_card' ? 'selected' : '' }}>

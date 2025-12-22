@@ -24,7 +24,7 @@
                             </td>
                             <td>{{ $invoice->date }}</td>
                             <td>{{ $invoice->type }}</td>
-                            <td>{{ $invoice->pay_mode }}</td>
+                            <td>{{ __("invoice.".$invoice->pay_mode) }}</td>
                             <td>{{ number_format($invoice->amount, 2, ',', ' ') }} Ft</td>
                             <td>{{ $invoice->comment }}</td>
                         </tr>
