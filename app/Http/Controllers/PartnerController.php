@@ -9,7 +9,7 @@ class PartnerController extends Controller
 {
     public function allPartnerView()
     {
-        $partners = Partner::all();
+        $partners = Partner::orderBy('name')->get();
         return view('pages.partner.all', compact('partners'));
     }
 
