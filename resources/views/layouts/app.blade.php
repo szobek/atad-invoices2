@@ -29,6 +29,7 @@
         <!-- Page Content -->
         <main>
             {{ $slot }}
+            <div class="upper"></div>
         </main>
     </div>
 </body>
