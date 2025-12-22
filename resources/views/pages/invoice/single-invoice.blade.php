@@ -22,7 +22,7 @@
                         <div class="mb-3">
                             <p>Dátum: {{ $invoice->date }}</p>
                             <p>típus: {{ $invoice->type }}</p>
-                            <p>Fizetési mód: {{ $invoice->pay_mode }}</p>
+                            <p>Fizetési mód: {{ __("invoice.".$invoice->pay_mode) }}</p>
                             <p>Összeg: {{ number_format($invoice->amount, 2, ',', ' ') }} Ft</p>
 
                             <form action="{{ route('invoice.delete', $invoice->id) }}" method="post">
