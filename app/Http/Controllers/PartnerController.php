@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Partner;
 use App\Models\Invoice;
+use Symfony\Component\HttpFoundation\Request;
 
 class PartnerController extends Controller
 {
-    public function allPartnerView()
+    public function allPartnerView(Request $request)
     {
-        $partners = Partner::orderBy('name')->get();
+        $search = request('search');;
+        $partners = Partner::query()
+        ->when($search, function ($query, $search) {
+            return $query->where('name', 'like', '%' . $search . '%');
+        })
+        ->orderBy('name')
+        ->paginate(20);
         return view('pages.partner.all', compact('partners'));
     }
 

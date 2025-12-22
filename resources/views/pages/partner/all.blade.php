@@ -11,6 +11,24 @@
             @endif
             <h2>Összes partner</h2>
             <div class="col-md-12 d-flex gap-4 flex-wrap">
+
+                <form method="GET" action="{{ route('pages.all-partners') }}" class="mb-4">
+                    <div>
+                        <p>
+                            Keresés név alapján:
+                        </p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            placeholder="Keresés név alapján..." class="form-control">
+
+                        <button type="submit" class="btn btn-secondary">
+                            Keresés
+                        </button>
+                    </div>
+                </form>
+
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -31,6 +49,8 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $partners->links() }}
+
             </div>
         </div>
     </div>
