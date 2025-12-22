@@ -1,4 +1,15 @@
 <x-app-layout>
+    @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+    @if(session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -44,8 +55,25 @@
                         <p>Név: {{ $partner->name }}</p>
                         <p>Cím: {{ $partner->address }}</p>
                         <a href="{{ route('pages.single-partner', $partner->id) }}">Partner adatai</a>
+                        <form action="{{ route('invoice-disconnect-partner') }}" method="post" class="mt-2">
+                            @csrf
+                            <input type="hidden" name="invoice_id" value="{{ $invoice->id }}">
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Biztosan le szeretnéd választani a partnert a számláról?')">
+                                Partner leválasztása
+                            </button>
                     @else
                         <p>Nincs partner hozzárendelve.</p>
+                        <form action="{{ route('invoice-to-partner-save') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="transaction_id" value="{{ $invoice->id }}">
+                            <label for="partner_id">Válassz partnert:</label>
+                            <select name="partner_id" id="partner_id" class="form-control">
+                                @foreach (App\Models\Partner::all() as $part)
+                                    <option value="{{ $part->id }}">{{ $part->name }} - {{ $part->zip }}{{ $part->address }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-primary mt-2">Partner hozzárendelése</button>
                     @endif
 
                 </div>

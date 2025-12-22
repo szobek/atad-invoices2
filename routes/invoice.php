@@ -14,7 +14,7 @@ Route::middleware("role:admin,sales")->group(function () {
     Route::post('/invoice-to-partner', [InvoiceController::class, 'connectPartnerToTransaction'])
         ->name('invoice-to-partner-save');
 
-    Route::post('/invoice-disconnect-partner', [InvoiceController::class, 'disconnectPartnerFromTransaction'])
+    Route::post('/invoice-disconnect-partner', [InvoiceController::class, 'disconnectPartnerFromInvoice'])
         ->name('invoice-disconnect-partner');
 
 

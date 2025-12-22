@@ -30,18 +30,28 @@ class InvoiceController extends Controller
             $invoice = Invoice::find($validateData["transaction_id"]);
             $invoice->partner_id = $validateData["partner_id"];
             $invoice->save();
-            return redirect()->back()->with('saved', 'A kapcsolat mentve!');
+            return redirect()->back()->with('success', 'A kapcsolat mentve!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Hiba történt a mentés során!');
         }
     }
 
-    public function disconnectPartnerFromTransaction(Request $request)
+    public function disconnectPartnerFromInvoice(Request $request)
     {
-        TransactionPartner::where('partner_id', $request->partner_id)
-            ->where('transaction_id', $request->transaction_id)
-            ->delete();
-        return redirect()->back();
+        $validateData = $request->validate([
+            "invoice_id" => 'required'
+        ]);
+        try {
+            $invoice = Invoice::find($validateData["invoice_id"]);
+            if ($invoice) {
+                $invoice->partner_id = null;
+                $invoice->save();
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Hiba történt a mentés során!');
+        }
+
+        return redirect()->back()->with('success', 'A kapcsolat törölve!');
     }
 
     public function invoiceCreateView()
