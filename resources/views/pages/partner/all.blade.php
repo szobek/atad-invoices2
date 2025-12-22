@@ -11,16 +11,26 @@
             @endif
             <h2>Összes partner</h2>
             <div class="col-md-12 d-flex gap-4 flex-wrap">
-                @foreach ($partners as $partner)
-                    <div class="card">
-                        <a href="{{ route('pages.single-partner', [$partner->id]) }}">
-                            <div class="card-body">
-                                <p class="card-text">Név: {{ $partner->name }}</p>
-                                <p class="card-text">Cím: {{ $partner->address }}</p>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Név</th>
+                            <th>Cím</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($partners as $partner)
+                            <tr>
+                                <td>
+                                    <a href="{{ route('pages.single-partner', [$partner->id]) }}">
+                                        {{ $partner->name }}
+                                    </a>
+                                </td>
+                                <td>{{ $partner->zip }} {{ $partner->state }} {{ $partner->address }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
