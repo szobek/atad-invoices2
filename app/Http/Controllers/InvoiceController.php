@@ -106,9 +106,15 @@ class InvoiceController extends Controller
         }
     }
 
-    public function allInvoices()
+    public function allInvoices(Request $request)
     {
-        $invoices = Invoice::all();
+        $search = request('search');
+        $invoices = Invoice::query()
+        ->when($search, function ($query, $search) {
+            return $query->where('num', 'like', '%' . $search . '%');
+        })
+        ->orderBy('date', 'desc')
+        ->paginate(20);
         return view('pages.invoice.all-invoices', compact('invoices'));
     }
 }
