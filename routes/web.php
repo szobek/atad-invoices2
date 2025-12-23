@@ -7,7 +7,7 @@ Route::get('/', function () {
     return view('pages.index');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
+Route::get('/dashboard/{year?}', [DashboardController::class, 'index'])
     ->middleware(['auth'])
     ->name('pages.dashboard');
 

@@ -10,7 +10,7 @@ if (chart_bar) {
         labels: labels,
         datasets: [
             {
-                label: 'számlák száma',
+                label: 'kimenő számlák száma',
                 data: JSON.parse(chart_bar.dataset.invoices) || "[]",
                 backgroundColor: Utils.CHART_COLORS.red,
             },
@@ -25,7 +25,7 @@ if (chart_bar) {
         labels: labels,
         datasets: [
             {
-                label: 'számlák száma',
+                label: 'kimenő számlák száma',
                 data: JSON.parse(chart_bar.dataset.invoices),
                 backgroundColor: Utils.CHART_COLORS.red,
             },
