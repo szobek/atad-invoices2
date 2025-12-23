@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Partner;
-use App\Models\TransactionPartner;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 
@@ -15,7 +14,7 @@ class InvoiceController extends Controller
     }
     public function connectPartnerToTransactionView()
     {
-        $partners = Partner::all();
+        $partners = Partner::orderBy('name')->get();
         $transactions = Invoice::where('partner_id', null)->get();
         return view('pages.invoice.connect-to-partner', compact('partners', 'transactions'));
     }

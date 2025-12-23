@@ -7,4 +7,11 @@ document.addEventListener('DOMContentLoaded', function () {
     upperDiv.addEventListener('click', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+     $(document).ready(function () {
+        $('#partner_id').select2({
+            placeholder: 'Keress partnerre',
+            allowClear: true
+        });
+    });
 });

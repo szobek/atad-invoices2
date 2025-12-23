@@ -5,9 +5,9 @@
         </div>
     @endif
 
-    @if(session('saved'))
+    @if(session('success'))
         <div class="alert alert-success" role="alert">
-            {{ session('saved') }}
+            {{ session('success') }}
         </div>
     @endif
     <div class="container mt-4">
@@ -16,7 +16,7 @@
             <div class="row">
 
                 <div class="col-md-4">
-                    <select name="partner_id" class="form-select">
+                    <select name="partner_id" id="partner_id" class="form-select">
                         <option value="">Kérlek válassz</option>
                         @foreach ($partners as $partner)
                         <option value="{{ $partner->id }}">

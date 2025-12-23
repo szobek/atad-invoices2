@@ -69,7 +69,7 @@
                             <input type="hidden" name="transaction_id" value="{{ $invoice->id }}">
                             <label for="partner_id">Válassz partnert:</label>
                             <select name="partner_id" id="partner_id" class="form-control">
-                                @foreach (App\Models\Partner::all() as $part)
+                                @foreach (App\Models\Partner::orderBy('name')->get() as $part)
                                     <option value="{{ $part->id }}">{{ $part->name }} - {{ $part->zip }}{{ $part->address }}</option>
                                 @endforeach
                             </select>

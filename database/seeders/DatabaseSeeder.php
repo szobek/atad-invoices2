@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
         ]);
-        Invoice::factory(10)->create();
+        Invoice::factory(1000)->create();
         Partner::factory(1000)->create();
     }
 }
