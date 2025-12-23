@@ -19,14 +19,6 @@ if (chart_bar) {
                 data: JSON.parse(chart_bar.dataset.storno) || "[]",
                 backgroundColor: Utils.CHART_COLORS.blue,
             },
-
-            {
-                label: 'lorem ipsum',
-                data: JSON.parse(chart_bar.dataset.lorem) || "[]",
-                backgroundColor: Utils.CHART_COLORS.green,
-            },
-
-
         ]
     };
     line_data = {

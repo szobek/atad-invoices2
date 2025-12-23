@@ -15,7 +15,7 @@
                 <canvas id="chart_bar" 
                     data-invoices="{{ json_encode($transactions_data["invoice"]) }}"
                     data-storno="{{ json_encode($transactions_data["stornos"]) }}"
-                    data-lorem="{{ json_encode($transactions_data["lorem"]) }}">
+                    >
                 </canvas>
             </div>
             <div class="col-md-6">
