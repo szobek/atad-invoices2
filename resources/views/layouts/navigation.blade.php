@@ -12,7 +12,10 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ route('pages.dashboard', date('Y')) }}">Dashboard</a>
         </li>
-        @if(Auth::user()->role == "admin" || Auth::user()->role == "sales")
+        @php
+          $user = auth()->user();
+        @endphp
+        @if($user->role == "admin" || $user->role == "sales")
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Számlák
@@ -34,13 +37,23 @@
             </ul>
           </li>
         @endif
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Üzletkötők
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('pages.all-salesperson') }}">Minden üzletkötő</a></li>
+            </ul>
+          </li>
+
       </ul>
       <div>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{ Auth::user()->name }}
+              {{ $user->name }}
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profil</a></li>
