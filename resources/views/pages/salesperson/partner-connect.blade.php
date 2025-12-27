@@ -1,4 +1,4 @@
-<x-app-layout title="Számla partnerhez rendelése">
+<x-app-layout title="Üzletkötő partnerhez rendelése">
     @if (session('error'))
         <div class="alert alert-danger" role="alert">
             {{ session('error') }}
