@@ -24,8 +24,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="state" class="form-label">Város</label>
-                    <input type="text" class="form-control" id="state" name="state" required>
+                    <label for="city" class="form-label">Város</label>
+                    <input type="text" class="form-control" id="city" name="city" required>
                 </div>
 
                 <div class="mb-3">

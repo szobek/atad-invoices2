@@ -25,8 +25,8 @@
                         <input type="text" name="zip" id="zip" value="{{ $partner->zip }}" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label for="state">Város:</label>
-                        <input type="text" name="state" id="state" value="{{ $partner->state }}" class="form-control" required>
+                        <label for="city">Város:</label>
+                        <input type="text" name="city" id="city" value="{{ $partner->city }}" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="address">Cím:</label>

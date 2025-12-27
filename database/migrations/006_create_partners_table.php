@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('tax')->nullable();
             $table->string('country')->nullable();
             $table->string('zip')->nullable();
-            $table->string('state')->nullable();
+            $table->string('city')->nullable();
             $table->string('address')->nullable();
             $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();

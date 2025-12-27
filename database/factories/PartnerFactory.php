@@ -20,7 +20,7 @@ class PartnerFactory extends Factory
             'name' => fake()->company(),
             'address' => fake()->address(),
             'zip' => fake()->postcode(),
-            'state' => fake()->city(),
+            'city' => fake()->city(),
             'tax' => fake()->unique()->numerify('###########'),
         ];
     }

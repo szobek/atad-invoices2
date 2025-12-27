@@ -13,12 +13,17 @@ class Partner extends Model
         'tax',
         'country',
         'zip',
-        'state',
+        'city',
         'address',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function address()
+    {
+        return $this->zip . ' ' . $this->city . ', ' . $this->address;
     }
 }

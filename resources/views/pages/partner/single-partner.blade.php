@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-body">
                         <p>Név: {{ $partner->name }}</p>
-                        <p>Cím: {{ $partner->zip }} {{ $partner->state }}, {{ $partner->address }} </p>
+                        <p>Cím: {{ $partner->zip }} {{ $partner->city }}, {{ $partner->address }} </p>
                         <p>Adószám: {{ $partner->tax }}</p>
                         <div class="d-flex gap-3">
                             <form action="{{ route('partner.delete', $partner->id) }}" method="post">

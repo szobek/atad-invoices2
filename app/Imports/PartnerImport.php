@@ -22,7 +22,7 @@ class PartnerImport implements ToModel, WithHeadingRow
                 'name'    => $row['nev'],
                 'country' => $row['orszag'],
                 'zip'     => $row['irsz'],
-                'state'   => $row['varos'],
+                'city'   => $row['varos'],
                 'address' => $row['cim'],
             ]
         );

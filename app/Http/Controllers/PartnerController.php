@@ -74,7 +74,7 @@ class PartnerController extends Controller
             'tax' => 'nullable|string|max:50',
             'country' => 'nullable|string|max:100',
             'zip' => 'nullable|string|max:20',
-            'state' => 'nullable|string|max:100',
+            'city' => 'nullable|string|max:100',
             'address' => 'nullable|string|max:255',
         ]);
 
@@ -94,7 +94,7 @@ class PartnerController extends Controller
             'name' => 'required|string|max:255',
             'tax' => 'nullable|string|max:50',
             'zip' => 'required|string|max:20',
-            'state' => 'required|string|max:100',
+            'city' => 'required|string|max:100',
             'address' => 'required|string|max:255',
         ]);
         try {

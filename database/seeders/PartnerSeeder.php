@@ -18,7 +18,7 @@ class PartnerSeeder extends Seeder
             'tax' => '12345678-1-12',
             'country' => 'Hungary',
             'zip' => '1111',
-            'state' => 'Budapest',
+            'city' => 'Budapest',
             'address' => 'Main Street 1',
         ]);
     }

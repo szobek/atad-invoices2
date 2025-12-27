@@ -21,7 +21,7 @@
                         @foreach ($partners as $partner)
                         <option value="{{ $partner->id }}">
                             {{ $partner->name }}
-                                {{ $partner->zip }} {{ $partner->state }} {{ $partner->address }}
+                                {{ $partner->zip }} {{ $partner->city }} {{ $partner->address }}
                             </option>
                         @endforeach
                     </select>

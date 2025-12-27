@@ -14,7 +14,7 @@
                         @else
                             <ul>
                                 @foreach($salesperson->partners as $partner)
-                                    <li>{{ $partner->name }} - {{ $partner->email }}</li>
+                                    <li>{{ $partner->name }} - {{ $partner->address }}</li>
                                 @endforeach
                             </ul>
                         @endif

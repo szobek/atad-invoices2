@@ -44,7 +44,7 @@
                                         {{ $partner->name }}
                                     </a>
                                 </td>
-                                <td>{{ $partner->zip }} {{ $partner->state }} {{ $partner->address }}</td>
+                                <td>{{ $partner->zip }} {{ $partner->city }} {{ $partner->address }}</td>
                             </tr>
                         @endforeach
                     </tbody>
