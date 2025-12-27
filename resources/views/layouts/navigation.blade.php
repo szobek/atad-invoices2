@@ -44,6 +44,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{ route('pages.all-salesperson') }}">Minden üzletkötő</a></li>
+              <li><a class="dropdown-item" href="{{ route('pages.salesperson.partner-connect') }}">Üzletkötő partnerhez </a></li>
             </ul>
           </li>
 

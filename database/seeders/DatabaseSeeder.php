@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Invoice;
 use App\Models\Partner;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,8 @@ class DatabaseSeeder extends Seeder
 
         Invoice::truncate();
         Partner::truncate();
-         DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        User::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
         $this->call([
             UserSeeder::class,
         ]);

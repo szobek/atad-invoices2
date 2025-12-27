@@ -22,7 +22,9 @@
         "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.3.8",
         "chart.js": "^4.5.1",
+        "jquery": "^3.7.1",
         "sass": "^1.96.0",
-        "sass-embedded": "^1.96.0"
+        "sass-embedded": "^1.96.0",
+        "select2": "^4.1.0-rc.0"
     }
 }

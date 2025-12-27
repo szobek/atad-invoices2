@@ -16,5 +16,9 @@ class Partner extends Model
         'state',
         'address',
     ];
-   
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

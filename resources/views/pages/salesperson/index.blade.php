@@ -13,7 +13,7 @@
                     <tbody>
                         @foreach($salespersons as $salesperson)
                             <tr>
-                                <td>{{ $salesperson->name }}</td>
+                                <td><a href="{{ route('pages.salesperson-detail', $salesperson->id) }}">{{ $salesperson->name }}</a></td>
                                 <td>{{ $salesperson->email }}</td>
                             </tr>
                         @endforeach
