@@ -15,6 +15,11 @@
         @php
           $user = auth()->user();
         @endphp
+        @if($user->role == "admin")
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('page.users') }}">Felhasználók</a>
+          </li>
+        @endif
         @if($user->role == "admin" || $user->role == "sales")
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">

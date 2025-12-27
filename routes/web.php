@@ -23,3 +23,5 @@ require __DIR__ . '/auth.php';
 require __DIR__ . '/invoice.php';
 require __DIR__ . '/partner.php';
 require __DIR__ . '/salesperson.php';
+require __DIR__ . '/user.php';
+
