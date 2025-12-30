@@ -16,9 +16,14 @@
           $user = auth()->user();
         @endphp
         @if($user->role == "admin")
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('page.users') }}">Felhasználók</a>
-          </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Felhasználók
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ route('page.users') }}">Felhasználók</a></li>
+          </ul>
+        </li>
         @endif
         @if($user->role == "admin" || $user->role == "sales")
           <li class="nav-item dropdown">
@@ -44,14 +49,15 @@
         @endif
 
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Üzletkötők
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{{ route('pages.all-salesperson') }}">Minden üzletkötő</a></li>
-              <li><a class="dropdown-item" href="{{ route('pages.salesperson.partner-connect') }}">Üzletkötő partnerhez </a></li>
-            </ul>
-          </li>
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Üzletkötők
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ route('pages.all-salesperson') }}">Minden üzletkötő</a></li>
+            <li><a class="dropdown-item" href="{{ route('pages.salesperson.partner-connect') }}">Üzletkötő partnerhez
+              </a></li>
+          </ul>
+        </li>
 
       </ul>
       <div>
