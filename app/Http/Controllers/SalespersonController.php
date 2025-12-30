@@ -39,4 +39,16 @@ class SalespersonController extends Controller
 
         return redirect()->back()->with('success', 'Partner sikeresen hozzárendelve a kereskedőhöz.');
     }
+
+    public function removePartnerFromSalesperson()
+    {
+        $partnerId = request('partner_id');
+        $partner = Partner::findOrFail($partnerId);
+
+        // Kapcsolat eltávolítása
+        $partner->user_id = null;
+        $partner->save();
+
+        return redirect()->back()->with('success', 'Partner sikeresen eltávolítva az üzletkötőtől.');
+    }
 }

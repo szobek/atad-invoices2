@@ -15,6 +15,10 @@ Route::middleware("auth")->group(function () {
         ->middleware(['role:admin,sales'])
         ->name('salesperson.connect-partner');
 
+        Route::post('/salesperson/remove-partner/', [SalespersonController::class, 'removePartnerFromSalesperson'])
+        ->middleware(['role:admin,sales'])
+        ->name('salesperson.remove-partner');
+
     Route::get('/salesperson/{id}', [SalespersonController::class, 'show'])
         ->middleware(['role:admin,sales'])
         ->name('pages.salesperson-detail');
