@@ -17,13 +17,13 @@
         @endphp
         @if($user->role == "admin")
           <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Felhasználók
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ route('page.users') }}">Minden felhasználó</a></li>
-          </ul>
-        </li>
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Felhasználók
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('page.users') }}">Minden felhasználó</a></li>
+            </ul>
+          </li>
         @endif
         @if($user->role == "admin" || $user->role == "sales")
           <li class="nav-item dropdown">
@@ -46,23 +46,31 @@
               <li><a class="dropdown-item" href="{{ route('pages.import.partners') }}">Partnerek importálása</a></li>
             </ul>
           </li>
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Üzletkötők
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ route('pages.all-salesperson') }}">Minden üzletkötő</a></li>
-            <li><a class="dropdown-item" href="{{ route('pages.salesperson.partner-connect') }}">Üzletkötő partnerhez
-              </a></li>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('pages.all-salesperson') }}">Minden üzletkötő</a></li>
+              <li><a class="dropdown-item" href="{{ route('pages.salesperson.partner-connect') }}">Üzletkötő partnerhez
+                </a></li>
             </ul>
-        </li>
-        
+          </li>
+          
         @endif
+        @if($user->role == "salesperson")
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('page.my-partners') }}">Saját partnerek</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ route('page.my-invoices') }}">Saját számlák</a>
+            </li>
+          @endif
       </ul>
       <div>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ $user->name }}

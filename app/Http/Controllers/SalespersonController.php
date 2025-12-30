@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Partner;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Invoice;
 class SalespersonController extends Controller
 {
     public function index()
@@ -50,5 +50,31 @@ class SalespersonController extends Controller
         $partner->save();
 
         return redirect()->back()->with('success', 'Partner sikeresen eltávolítva az üzletkötőtől.');
+    }
+
+    public function myPartners()
+    {
+        $user = Auth::user();
+        $partners = Partner::where('user_id', $user->id)->get();
+
+        return view('pages.salesperson.my-partners', compact('partners'));
+    }
+    public function myInvoices()
+    {
+        $list = [];
+        $user = Auth::user();
+        $invoices = Invoice::whereHas('partner', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+        foreach ($invoices as $invoice) {
+            $list[]=[
+                'partner_name' => $invoice->partner->name,
+                'amount' => $invoice->amount,
+                'date' => $invoice->date,
+            ];
+        }
+
+        return view('pages.salesperson.my-invoices', compact('list'));
     }
 }

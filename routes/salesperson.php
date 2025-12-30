@@ -15,11 +15,19 @@ Route::middleware("auth")->group(function () {
         ->middleware(['role:admin,sales'])
         ->name('salesperson.connect-partner');
 
-        Route::post('/salesperson/remove-partner/', [SalespersonController::class, 'removePartnerFromSalesperson'])
+    Route::post('/salesperson/remove-partner/', [SalespersonController::class, 'removePartnerFromSalesperson'])
         ->middleware(['role:admin,sales'])
         ->name('salesperson.remove-partner');
 
     Route::get('/salesperson/{id}', [SalespersonController::class, 'show'])
         ->middleware(['role:admin,sales'])
         ->name('pages.salesperson-detail');
+
+    Route::get('/my-partners', [SalespersonController::class, 'myPartners'])
+        ->middleware(['role:salesperson'])
+        ->name('page.my-partners');
+        
+    Route::get('/my-invoices', [SalespersonController::class, 'myInvoices'])
+        ->middleware(['role:salesperson'])
+        ->name('page.my-invoices');
 });
