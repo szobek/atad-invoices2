@@ -21,7 +21,7 @@
             Felhasználók
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ route('page.users') }}">Felhasználók</a></li>
+            <li><a class="dropdown-item" href="{{ route('page.users') }}">Minden felhasználó</a></li>
           </ul>
         </li>
         @endif
@@ -46,23 +46,23 @@
               <li><a class="dropdown-item" href="{{ route('pages.import.partners') }}">Partnerek importálása</a></li>
             </ul>
           </li>
-        @endif
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Üzletkötők
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Üzletkötők
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{ route('pages.all-salesperson') }}">Minden üzletkötő</a></li>
             <li><a class="dropdown-item" href="{{ route('pages.salesperson.partner-connect') }}">Üzletkötő partnerhez
               </a></li>
-          </ul>
+            </ul>
         </li>
-
+        
+        @endif
       </ul>
       <div>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
+          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ $user->name }}
