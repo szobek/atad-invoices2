@@ -22,6 +22,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{ route('page.users') }}">Minden felhasználó</a></li>
+              <li><a class="dropdown-item" href="{{ route('page.user-create') }}">Új felhasználó</a></li>
             </ul>
           </li>
         @endif
@@ -43,6 +44,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{ route('pages.all-partners') }}">Minden partner</a></li>
+              <li><a class="dropdown-item" href="{{ route('pages.create-partner') }}">Új partner</a></li>
               <li><a class="dropdown-item" href="{{ route('pages.import.partners') }}">Partnerek importálása</a></li>
             </ul>
           </li>

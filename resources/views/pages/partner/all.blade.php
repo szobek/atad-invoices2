@@ -2,7 +2,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ route('pages.create-partner') }}" class="btn btn-primary my-3">Új partner hozzáadása</a>
             </div>
             <x-info />
             <h2>Összes partner</h2>
