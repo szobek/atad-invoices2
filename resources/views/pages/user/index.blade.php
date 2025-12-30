@@ -18,7 +18,7 @@
                             <tr>
                                 <td><a href="{{ route('page.user-detail', $user->id) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->role }}</td>
+                                <td>{{ __("user.".$user->role) }}</td>
                                 <td>
                                     <a href="{{ route('page.user-edit', $user->id) }}"
                                         class="btn btn-sm btn-secondary">Szerkesztés</a>

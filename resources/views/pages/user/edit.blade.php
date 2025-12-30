@@ -23,11 +23,11 @@
 
                     <!-- Role -->
                     <div class="mt-4">
-                        <x-input-label for="role" :value="__('Szerepkör')" />
-                        <select id="role" name="role" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="sales" {{ $user->role == 'sales' ? 'selected' : '' }}>Sales</option>
-                            <option value="salesperson" {{ $user->role == 'salesperson' ? 'selected' : '' }}>Üzletkötő</option>
+                        <x-input-label for="role" :value="__('user.role')" />
+                        <select id="role" name="role" class="form-control">
+                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>{{ __('user.admin') }}</option>
+                            <option value="sales" {{ $user->role == 'sales' ? 'selected' : '' }}>{{ __('user.sales') }}</option>
+                            <option value="salesperson" {{ $user->role == 'salesperson' ? 'selected' : '' }}>{{ __('user.salesperson') }}</option>
                         </select>
                     </div>
 
