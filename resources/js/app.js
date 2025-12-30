@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     const partnerSelect = document.getElementById('partner_id');
     const userSelect = document.getElementById('user_id');
+    const invoiceSelect = document.getElementById('invoice_id');
     
     if (partnerSelect !== null || userSelect !== null) {
         const link = document.createElement('link');
@@ -52,6 +53,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (userSelect !== null) {
                 $(userSelect).select2({
                     placeholder: 'Keress értékesítőre',
+                    allowClear: true,
+                    width: '100%'
+                });
+            }
+
+            if (invoiceSelect !== null) {
+                $(invoiceSelect).select2({
+                    placeholder: 'Keress számlára',
                     allowClear: true,
                     width: '100%'
                 });

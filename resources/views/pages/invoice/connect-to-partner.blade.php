@@ -1,5 +1,5 @@
 <x-app-layout title="Számla partnerhez rendelése">
-   
+   <x-info/>
     <div class="container mt-4">
         <form action="{{ route('invoice-to-partner-save') }}" method="post">
             @csrf
@@ -18,10 +18,10 @@
                 </div>
                 
                 <div class="col-md-4">
-                    <select name="transaction_id" class="form-select">
+                    <select name="invoice_id" id="invoice_id" class="form-select">
                         <option value="">Kérlek válassz</option>
-                        @foreach ($transactions as $transaction)
-                        <option value="{{ $transaction->id }}">{{ $transaction->num }} </option>
+                        @foreach ($invoices as $invoice)
+                        <option value="{{ $invoice->id }}">{{ $invoice->num }} </option>
                         @endforeach
                     </select>
                     

@@ -8,10 +8,10 @@ Route::middleware("role:admin,sales")->group(function () {
     Route::get('/invoices', [InvoiceController::class, 'index'])
         ->name('pages.invoices');
 
-    Route::get('/invoices-to-partner', [InvoiceController::class, 'connectPartnerToTransactionView'])
+    Route::get('/invoices-to-partner', [InvoiceController::class, 'connectPartnerToInvoiceView'])
         ->name('pages.invoices-to-partner');
 
-    Route::post('/invoice-to-partner', [InvoiceController::class, 'connectPartnerToTransaction'])
+    Route::post('/invoice-to-partner', [InvoiceController::class, 'connectPartnerToInvoice'])
         ->name('invoice-to-partner-save');
 
     Route::post('/invoice-disconnect-partner', [InvoiceController::class, 'disconnectPartnerFromInvoice'])

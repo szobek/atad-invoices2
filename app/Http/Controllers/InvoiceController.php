@@ -12,21 +12,21 @@ class InvoiceController extends Controller
     {
         dd('invoices');
     }
-    public function connectPartnerToTransactionView()
+    public function connectPartnerToInvoiceView()
     {
         $partners = Partner::orderBy('name')->get();
-        $transactions = Invoice::where('partner_id', null)->get();
-        return view('pages.invoice.connect-to-partner', compact('partners', 'transactions'));
+        $invoices = Invoice::where('partner_id', null)->get();
+        return view('pages.invoice.connect-to-partner', compact('partners', 'invoices'));
     }
-    public function connectPartnerToTransaction(Request $request)
+    public function connectPartnerToInvoice(Request $request)
     {
         $validateData = $request->validate([
             "partner_id" => 'required',
-            "transaction_id" => 'required'
+            "invoice_id" => 'required'
         ]);
 
         try {
-            $invoice = Invoice::find($validateData["transaction_id"]);
+            $invoice = Invoice::find($validateData["invoice_id"]);
             $invoice->partner_id = $validateData["partner_id"];
             $invoice->save();
             return redirect()->back()->with('success', 'A kapcsolat mentve!');
