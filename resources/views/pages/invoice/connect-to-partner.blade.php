@@ -1,15 +1,5 @@
 <x-app-layout title="Számla partnerhez rendelése">
-    @if (session('error'))
-        <div class="alert alert-danger" role="alert">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    @if(session('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
+   
     <div class="container mt-4">
         <form action="{{ route('invoice-to-partner-save') }}" method="post">
             @csrf

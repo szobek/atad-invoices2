@@ -4,11 +4,7 @@
             <div class="col-md-12">
                 <a href="{{ route('pages.create-partner') }}" class="btn btn-primary my-3">Új partner hozzáadása</a>
             </div>
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+            <x-info />
             <h2>Összes partner</h2>
             <div class="col-md-12 d-flex gap-4 flex-wrap">
 

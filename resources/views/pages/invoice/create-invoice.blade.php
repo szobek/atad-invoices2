@@ -10,17 +10,7 @@
                 <h3>Új számla</h3>
                 <p>Készíts új számlát ügyfeleid számára, és kövesd nyomon a fizetéseket.</p>
                 <hr>
-                @if (session('error'))
-                    <div class="alert alert-danger" role="alert">
-                        {{ session('error') }}
-                    </div>
-                @endif
-
-                @if(session('saved'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('saved') }}
-                    </div>
-                @endif
+               <x-info />
                 <form action="{{ route('invoices-create') }}" method="post">
                     @csrf
                     <div class="row">

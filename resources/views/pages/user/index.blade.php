@@ -3,16 +3,7 @@
         <div class="row">
             <div class="col-md-12 pt-3">
                 <a href="{{ route('page.user-create') }}" class="btn btn-primary">Új felhasználó</a>
-                 @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @if(session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
+              <x-info />
                 <h2>Felhasználók listája</h2>
                 <table class="table">
                     <thead>

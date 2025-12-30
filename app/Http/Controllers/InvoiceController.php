@@ -76,7 +76,7 @@ class InvoiceController extends Controller
                 'amount' => $validatedData['amount'],
                 'comment' => $validatedData['comment'] ?? null,
             ]);
-            return redirect()->back()->with('saved', 'A számla mentve!');
+            return redirect()->back()->with('success', 'A számla mentve!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Hiba történt a mentés során!');
         }

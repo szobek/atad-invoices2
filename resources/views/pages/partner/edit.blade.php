@@ -2,16 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                @if(session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>  
-                @endif
+                <x-info />
                 <h1>Partner szerkesztése</h1>
                 <form action="{{ route('partner.update', $partner->id) }}" method="post">
                     @csrf
