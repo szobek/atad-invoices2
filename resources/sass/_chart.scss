@@ -1,10 +1,8 @@
 .chart-container {
-    gap: 15px;
-    .col-md-6 {
-        max-height: 270px;
+    .chart {
         border: 1px solid #aaa;
+        margin-top: 20px;
         border-radius: 5px;
-        max-width: 45%;
         text-align: center;
     }
 }

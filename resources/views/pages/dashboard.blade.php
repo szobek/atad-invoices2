@@ -20,30 +20,42 @@
         </div>
         <div class="row chart-container">
             <div class="col-md-6">
-                <canvas id="chart_bar" data-invoices="{{ json_encode($dashboard_data["bar_chart"]["normal"]) }}"
-                    data-storno="{{ json_encode($dashboard_data["bar_chart"]["storno"]) }}">
-                </canvas>
-            </div>
+                <div class="chart">
 
-            <div class="col-md-6">
-                <canvas id="chart_line" data-invoices="{{ json_encode($dashboard_data["bar_chart"]["normal"]) }}"
-                    data-storno="{{ json_encode($dashboard_data["bar_chart"]["storno"]) }}">
-                </canvas>
-            </div>
-
-            <div class="col-md-6">
-                <canvas id="chart_amount"
-                    data-invoices_amount="{{ json_encode($dashboard_data["amount_chart_data"]["normal"]) }}"
-                    data-storno_amount="{{ json_encode($dashboard_data["amount_chart_data"]["storno"]) }}">
-                </canvas>
-            </div>
-
-            <div class="col-md-6">
-                <div class="d-flex justify-content-center align-items-center pb-2" style="max-height: 270px;">
-                    <canvas id="chart_donut"
-                        data-invoices="{{ json_encode($dashboard_data["donut_chart"]["invoices"]) }}"
-                        data-storno="{{ json_encode($dashboard_data["donut_chart"]["storno"]) }}">
+                    <canvas id="chart_bar" data-invoices="{{ json_encode($dashboard_data["bar_chart"]["normal"]) }}"
+                        data-storno="{{ json_encode($dashboard_data["bar_chart"]["storno"]) }}">
                     </canvas>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="chart">
+
+                    <canvas id="chart_line" data-invoices="{{ json_encode($dashboard_data["bar_chart"]["normal"]) }}"
+                        data-storno="{{ json_encode($dashboard_data["bar_chart"]["storno"]) }}">
+                    </canvas>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="chart">
+
+                    <canvas id="chart_amount"
+                        data-invoices_amount="{{ json_encode($dashboard_data["amount_chart_data"]["normal"]) }}"
+                        data-storno_amount="{{ json_encode($dashboard_data["amount_chart_data"]["storno"]) }}">
+                    </canvas>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="chart">
+
+                    <div class="d-flex justify-content-center align-items-center pb-2" style="max-height: 270px;">
+                        <canvas id="chart_donut"
+                            data-invoices="{{ json_encode($dashboard_data["donut_chart"]["invoices"]) }}"
+                            data-storno="{{ json_encode($dashboard_data["donut_chart"]["storno"]) }}">
+                        </canvas>
+                    </div>
                 </div>
 
             </div>
