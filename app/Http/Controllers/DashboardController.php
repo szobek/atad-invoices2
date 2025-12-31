@@ -62,6 +62,10 @@ class DashboardController extends Controller
             $dashboard_data["amount_chart_data"]['storno'][] = $sor['storno_amount'];
             $dashboard_data["amount_chart_data"]['normal'][] = $sor['normal_amount'];
         }
+        $dashboard_data["donut_chart"] = [
+            'invoices' => Invoice::whereYear('date', $start)->where('type', 'invoice')->count(),
+            'storno' => Invoice::whereYear('date', $start)->where('type', 'storno')->count(),
+        ];
 
 
         return view('pages.dashboard', compact('dashboard_data', 'year'));

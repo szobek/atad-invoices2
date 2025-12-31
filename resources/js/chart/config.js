@@ -1,4 +1,4 @@
-import { bar_data, line_data,amount_data } from './datas.js'
+import { bar_data, line_data,amount_data,donut_data } from './datas.js'
 const config_bar = {
     type: 'bar',
     data: bar_data,
@@ -58,4 +58,18 @@ const config_amount = {
     }
 };
 
-export {config_bar, config_line, config_amount}
+const config_donut = {
+    type: 'doughnut',
+    data: donut_data,
+    options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Számlák összege',
+            },
+        },
+        responsive: true,
+    }
+};
+
+export {config_bar, config_line, config_amount, config_donut}

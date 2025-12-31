@@ -38,6 +38,14 @@
                 data-storno_amount="{{ json_encode($dashboard_data["amount_chart_data"]["storno"]) }}">
                 </canvas>
             </div>
+            
+            <div class="col-md-6">
+                <canvas id="chart_donut" 
+                data-invoices="{{ json_encode($dashboard_data["donut_chart"]["invoices"]) }}"
+                data-storno="{{ json_encode($dashboard_data["donut_chart"]["storno"]) }}">
+                </canvas>
+            </div>
+
         </div>
     </div>
 </x-app-layout>
