@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <select name="year" id="year" >
+                <select name="year" id="year">
                     <option value="">Kérlek válassz</option>
                     <option value="2025" @if($year == 2025) selected @endif>2025</option>
                     <option value="2026" @if($year == 2026) selected @endif>2026</option>
@@ -20,13 +20,22 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <canvas id="chart_bar" data-invoices="{{ json_encode($dashboard_data["bar_chart"]["normal"]) }}"
-                    data-storno="{{ json_encode($dashboard_data["bar_chart"]["storno"]) }}">
+                <canvas id="chart_bar" 
+                data-invoices="{{ json_encode($dashboard_data["bar_chart"]["normal"]) }}"
+                data-storno="{{ json_encode($dashboard_data["bar_chart"]["storno"]) }}">
                 </canvas>
             </div>
+
             <div class="col-md-6">
                 <canvas id="chart_line" data-invoices="{{ json_encode($dashboard_data["bar_chart"]["normal"]) }}"
                     data-storno="{{ json_encode($dashboard_data["bar_chart"]["storno"]) }}">
+                </canvas>
+            </div>
+
+            <div class="col-md-6">
+                <canvas id="chart_amount" 
+                data-invoices_amount="{{ json_encode($dashboard_data["amount_chart_data"]["normal"]) }}"
+                data-storno_amount="{{ json_encode($dashboard_data["amount_chart_data"]["storno"]) }}">
                 </canvas>
             </div>
         </div>
