@@ -46,12 +46,12 @@ if (chart_bar) {
             {
                 label: 'kimenő számlák összege',    
                 data: JSON.parse(chart_amount.dataset.invoices_amount) || "[]",
-                backgroundColor: Utils.CHART_COLORS.red,
+                backgroundColor: Utils.CHART_COLORS.orange,
             },
             {
                 label: 'sztornó számlák összege',
                 data: JSON.parse(chart_amount.dataset.storno_amount) || "[]",
-                backgroundColor: Utils.CHART_COLORS.blue,
+                backgroundColor: Utils.CHART_COLORS.green,
             },
         ]
     };
