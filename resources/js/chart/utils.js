@@ -6,6 +6,7 @@ export const Utils = {
         yellow: 'rgb(255, 205, 86)',
         purple: 'rgb(153, 102, 255)',
         orange: 'rgb(255, 159, 64)',
+        transparent: 'rgba(0, 0, 0, 0.0)',
     },
     labels: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December']
 }

@@ -1,66 +1,71 @@
 import { Utils } from './utils.js'
 
 const labels = Utils.labels;
-const chart_bar = document.getElementById('chart_bar') || null;
-const chart_amount = document.getElementById('chart_amount') || null;
-const chart_donut = document.getElementById('chart_donut') || null;
-let bar_data = {};
-let line_data = {};
-let amount_data={};
-let donut_data={};
-if (chart_bar) {
-
-    bar_data = {
+const setBarData = () => {
+    const chartBar = document.getElementById('chart_bar') || null;
+    return {
         labels: labels,
         datasets: [
             {
                 label: 'kimenő számlák száma',
-                data: JSON.parse(chart_bar.dataset.invoices) || "[]",
+                data: JSON.parse(chartBar.dataset.invoices||"[]"),
                 backgroundColor: Utils.CHART_COLORS.red,
             },
             {
                 label: 'sztornó számlák',
-                data: JSON.parse(chart_bar.dataset.storno) || "[]",
+                data: JSON.parse(chartBar.dataset.storno||"[]"),
                 backgroundColor: Utils.CHART_COLORS.blue,
             },
         ]
     };
-    line_data = {
+}
+const setLineData = () => {
+    const chartBar = document.getElementById('chart_bar') || null;
+    return {
         labels: labels,
         datasets: [
             {
                 label: 'kimenő számlák száma',
-                data: JSON.parse(chart_bar.dataset.invoices),
+                data: JSON.parse(chartBar.dataset.invoices||"[]"),
                 backgroundColor: Utils.CHART_COLORS.red,
+                lineTension: 0.1,
             },
             {
                 label: 'sztornó számlák',
-                data: JSON.parse(chart_bar.dataset.storno),
+                data: JSON.parse(chartBar.dataset.storno||"[]"),
                 backgroundColor: Utils.CHART_COLORS.blue,
+                lineTension: 0.1,
             },
         ]
     };
-    amount_data={
-        labels,
+}
+const setAmountData = () => {
+    const chartAmount = document.getElementById('chart_amount') || null;
+    return {
+        labels: labels,
         datasets: [
             {
-                label: 'kimenő számlák összege',    
-                data: JSON.parse(chart_amount.dataset.invoices_amount) || "[]",
-                backgroundColor: Utils.CHART_COLORS.orange,
+                label: 'kimenő számlák összege',
+                data: JSON.parse(chartAmount.dataset.invoices||"[]"),
+                backgroundColor: Utils.CHART_COLORS.green,
             },
             {
                 label: 'sztornó számlák összege',
-                data: JSON.parse(chart_amount.dataset.storno_amount) || "[]",
-                backgroundColor: Utils.CHART_COLORS.green,
+                data: JSON.parse(chartAmount.dataset.storno||"[]"),
+                backgroundColor: Utils.CHART_COLORS.orange,
             },
         ]
     };
-    donut_data={
+}
+
+const setDonutData =()=>{
+    const chartDonut=document.getElementById('chart_donut')
+    return {
         labels: ['Kimenő számlák', 'Sztornó számlák'],
         datasets: [
             {
                 label: 'Számlák ',
-                data: [JSON.parse(chart_donut.dataset.invoices) || 0, JSON.parse(chart_donut.dataset.storno) || 0],
+                data: [JSON.parse(chartDonut.dataset.invoices) || 0, JSON.parse(chartDonut.dataset.storno) || 0],
                 backgroundColor: [
                     Utils.CHART_COLORS.red,
                     Utils.CHART_COLORS.green,
@@ -69,4 +74,6 @@ if (chart_bar) {
         ]
     };
 }
-export { bar_data, line_data, amount_data, donut_data }
+
+
+export { setBarData, setLineData, setAmountData,setDonutData }
