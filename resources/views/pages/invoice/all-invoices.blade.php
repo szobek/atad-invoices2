@@ -22,8 +22,22 @@
                 <table class="table stripped">
                     <thead>
                         <tr>
-                            <th>Számlaszám</th>
-                            <th>Dátum</th>
+                            <th>
+                                 <a href="{{ request()->fullUrlWithQuery(['sort' => 'num', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}">
+                                    Számlaszám 
+                                    @if($sort == 'num') 
+                                        <i class="bi bi-caret-{{ $direction == 'asc' ? 'up' : 'down' }}-fill"></i> 
+                                    @endif
+                                </a>
+                            </th>
+                            <th>
+                                 <a href="{{ request()->fullUrlWithQuery(['sort' => 'date', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}">
+                                    Dátum
+                                    @if($sort == 'date') 
+                                        <i class="bi bi-caret-{{ $direction == 'asc' ? 'up' : 'down' }}-fill"></i> 
+                                    @endif
+                                </a>
+                            </th>
                             <th>Típus</th>
                             <th>Fizetési mód</th>
                             <th>Összeg</th>

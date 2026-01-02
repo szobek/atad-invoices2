@@ -108,13 +108,18 @@ class InvoiceController extends Controller
 
     public function allInvoices(Request $request)
     {
+         $sortable = ['num', 'date', 'amount', 'type'];
+          $sort = in_array($request->get('sort'), $sortable) ? $request->get('sort') : 'date';
+    $direction = $request->get('direction') == 'asc' ? 'asc' : 'desc';
+
         $search = request('search');
         $invoices = Invoice::query()
         ->when($search, function ($query, $search) {
             return $query->where('num', 'like', '%' . $search . '%');
         })
-        ->orderBy('date', 'desc')
-        ->paginate(20);
-        return view('pages.invoice.all-invoices', compact('invoices'));
+        ->orderBy($sort, $direction)
+        ->paginate(20)
+        ->withQueryString();
+        return view('pages.invoice.all-invoices', compact('invoices','direction','sort'));
     }
 }
