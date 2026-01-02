@@ -15,6 +15,7 @@
                             Keresés
                         </button>
                     </div>
+                    <a href="{{ route('pages.all-invoices') }}">Keresés törlése</a>
                 </form>
             </div>
             <div class="col-12">
