@@ -21,14 +21,41 @@
                             Keresés
                         </button>
                     </div>
+                    <div>
+                        @if($search)
+                        <a href="{{ route('pages.all-partners') }}">Keresés törlése</a>
+                        @endif
+                    </div>
                 </form>
 
 
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Név</th>
-                            <th>Cím</th>
+                            <th>
+                                <a href="{{ request()->fullUrlWithQuery(['sort' => 'name', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}">
+                                    Név
+                                    @if($sort == 'name') 
+                                        <i class="bi bi-caret-{{ $direction == 'asc' ? 'up' : 'down' }}-fill"></i> 
+                                    @endif
+                                </a>
+                            </th>
+                            <th>
+                                <a href="{{ request()->fullUrlWithQuery(['sort' => 'zip', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}">
+                                    Irányítószám
+                                    @if($sort == 'zip') 
+                                        <i class="bi bi-caret-{{ $direction == 'asc' ? 'up' : 'down' }}-fill"></i> 
+                                    @endif
+                                </a>
+                            </th>
+                            <th>
+                                <a href="{{ request()->fullUrlWithQuery(['sort' => 'address', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}">
+                                    Cím
+                                    @if($sort == 'address') 
+                                        <i class="bi bi-caret-{{ $direction == 'asc' ? 'up' : 'down' }}-fill"></i> 
+                                    @endif
+                                </a>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +66,7 @@
                                         {{ $partner->name }}
                                     </a>
                                 </td>
+                                <td>{{ $partner->zip }}</td>
                                 <td>{{ $partner->zip }} {{ $partner->city }} {{ $partner->address }}</td>
                             </tr>
                         @endforeach

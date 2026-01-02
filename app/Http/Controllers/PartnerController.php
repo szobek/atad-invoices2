@@ -10,14 +10,20 @@ class PartnerController extends Controller
 {
     public function allPartnerView(Request $request)
     {
-        $search = request('search');;
+        $sortable = ['name', 'zip', 'address'];
+
+        $sort = in_array($request->get('sort'), $sortable) ? $request->get('sort') : 'name';
+        $direction = $request->get('direction') == 'asc' ? 'asc' : 'desc';
+
+        $search = request('search');
         $partners = Partner::query()
-        ->when($search, function ($query, $search) {
-            return $query->where('name', 'like', '%' . $search . '%');
-        })
-        ->orderBy('name')
-        ->paginate(20);
-        return view('pages.partner.all', compact('partners'));
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy($sort, $direction)
+            ->paginate(20)
+            ->withQueryString();
+        return view('pages.partner.all', compact('partners','direction','sort','search'));
     }
 
     public function showPartner($id)
