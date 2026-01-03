@@ -1,7 +1,7 @@
 
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
-import { setBarConfig, setLineConfig, setAmountConfig,setDonutConfig } from './config'
+import { setBarConfig, setLineConfig, setAmountConfig, setDonutConfig } from './config'
 const chartContainer = document.getElementById('chart-container') || null;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -21,25 +21,21 @@ document.addEventListener('DOMContentLoaded', function () {
         { key: 'storno', value: `[${chartData.amount_chart_data.storno}]` }
     ]);
 
-    createChartElement('chart_donut',[
-         { key: 'invoices', value: `[${chartData.donut_chart.invoices}]` },
+    createChartElement('chart_donut', [
+        { key: 'invoices', value: `[${chartData.donut_chart.invoices}]` },
         { key: 'storno', value: `[${chartData.donut_chart.storno}]` }
     ])
 
+    const chartDefinitions = [
+        { id: '#chart_bar', config: setBarConfig },
+        { id: '#chart_line', config: setLineConfig },
+        { id: '#chart_amount', config: setAmountConfig },
+        { id: '#chart_donut', config: setDonutConfig }
+    ];
 
-    waitForElement('#chart_bar').then((chart_bar) => {
-        new Chart(chart_bar, setBarConfig());
+    chartDefinitions.forEach(({ id, config }) => {
+        waitForElement(id).then(element => new Chart(element, config()));
     });
-    waitForElement('#chart_line').then((chart_line) => {
-        new Chart(chart_line, setLineConfig());
-    });
-    waitForElement('#chart_amount').then((chart_amount) => {
-        new Chart(chart_amount, setAmountConfig());
-    });
-    waitForElement('#chart_donut').then((chartDonut)=>{
-        new Chart(chartDonut,setDonutConfig())
-    })
-
 })
 
 const waitForElement = (selector) => {
@@ -62,18 +58,18 @@ const waitForElement = (selector) => {
     });
 };
 
-const createChartElement = (id, data,style=null) => {
-    const chartCol=document.createElement('div')
+const createChartElement = (id, data, style = null) => {
+    const chartCol = document.createElement('div')
     const chartdiv = document.createElement('div');
     const canvas = document.createElement('canvas');
 
     chartCol.classList.add('col-md-6');
     chartdiv.classList.add('chart')
-    if(style){
-         Object.assign(chartdiv.style, style);
+    if (style) {
+        Object.assign(chartdiv.style, style);
     }
     canvas.id = id;
-    chartdiv.style.maxHeight="300px"
+    chartdiv.style.maxHeight = "300px"
     for (const row of data) {
         canvas.dataset[row.key] = row.value;
     }
