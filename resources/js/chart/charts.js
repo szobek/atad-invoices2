@@ -1,80 +1,79 @@
-
 import { Chart, registerables } from 'chart.js';
+import { setBarConfig, setLineConfig, setAmountConfig, setDonutConfig } from './config';
+
 Chart.register(...registerables);
-import { setBarConfig, setLineConfig, setAmountConfig, setDonutConfig } from './config'
-const chartContainer = document.getElementById('chart-container') || null;
+
+const chartContainer = document.getElementById('chart-container');
 
 document.addEventListener('DOMContentLoaded', function () {
+     if (!chartContainer || typeof chartData === 'undefined') {
+        console.warn('Chart container or chartData is missing');
+        return;
+    }
 
-    createChartElement('chart_bar', [
-        { key: 'invoices', value: `[${chartData.bar_chart.normal}]` },
-        { key: 'storno', value: `[${chartData.bar_chart.storno}]` }
-    ]);
-
-    createChartElement('chart_line', [
-        { key: 'invoices', value: `[${chartData.bar_chart.normal}]` },
-        { key: 'storno', value: `[${chartData.bar_chart.storno}]` }
-    ]);
-
-    createChartElement('chart_amount', [
-        { key: 'invoices', value: `[${chartData.amount_chart_data.normal}]` },
-        { key: 'storno', value: `[${chartData.amount_chart_data.storno}]` }
-    ]);
-
-    createChartElement('chart_donut', [
-        { key: 'invoices', value: `[${chartData.donut_chart.invoices}]` },
-        { key: 'storno', value: `[${chartData.donut_chart.storno}]` }
-    ])
-
-    const chartDefinitions = [
-        { id: '#chart_bar', config: setBarConfig },
-        { id: '#chart_line', config: setLineConfig },
-        { id: '#chart_amount', config: setAmountConfig },
-        { id: '#chart_donut', config: setDonutConfig }
+    const charts = [
+        {
+            id: 'chart_bar',
+            config: setBarConfig,
+            data: {
+                invoices: chartData.bar_chart.normal,
+                storno: chartData.bar_chart.storno
+            }
+        },
+        {
+            id: 'chart_line',
+            config: setLineConfig,
+            data: {
+                invoices: chartData.bar_chart.normal,
+                storno: chartData.bar_chart.storno
+            }
+        },
+        {
+            id: 'chart_amount',
+            config: setAmountConfig,
+            data: {
+                invoices: chartData.amount_chart_data.normal,
+                storno: chartData.amount_chart_data.storno
+            }
+        },
+        {
+            id: 'chart_donut',
+            config: setDonutConfig,
+            data: {
+                invoices: chartData.donut_chart.invoices,
+                storno: chartData.donut_chart.storno
+            }
+        }
     ];
 
-    chartDefinitions.forEach(({ id, config }) => {
-        waitForElement(id).then(element => new Chart(element, config()));
-    });
-})
-
-const waitForElement = (selector) => {
-    return new Promise((resolve) => {
-        if (document.querySelector(selector)) {
-            return resolve(document.querySelector(selector));
+    charts.forEach(({ id, config, data }) => {
+        const canvas = createChartElement(id, data);
+        try {
+            new Chart(canvas, config());
+        } catch (error) {
+            console.error(`Failed to create chart ${id}:`, error);
         }
-
-        const observer = new MutationObserver(() => {
-            if (document.querySelector(selector)) {
-                resolve(document.querySelector(selector));
-                observer.disconnect();
-            }
-        });
-
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
     });
-};
+});
 
-const createChartElement = (id, data, style = null) => {
-    const chartCol = document.createElement('div')
-    const chartdiv = document.createElement('div');
+const createChartElement = (id, dataObj) => {
+    const chartCol = document.createElement('div');
+    const chartDiv = document.createElement('div');
     const canvas = document.createElement('canvas');
 
-    chartCol.classList.add('col-md-6');
-    chartdiv.classList.add('chart')
-    if (style) {
-        Object.assign(chartdiv.style, style);
-    }
-    canvas.id = id;
-    chartdiv.style.maxHeight = "300px"
-    for (const row of data) {
-        canvas.dataset[row.key] = row.value;
-    }
+    chartCol.className = 'col-md-6';
+    chartDiv.className = 'chart';
+    chartDiv.style.maxHeight = "300px";
 
-    chartCol.appendChild(chartdiv)
-    chartdiv.appendChild(canvas);
+    canvas.id = id;
+
+    Object.entries(dataObj).forEach(([key, value]) => {
+        canvas.dataset[key] = JSON.stringify(value);
+    });
+
+    chartDiv.appendChild(canvas);
+    chartCol.appendChild(chartDiv);
     chartContainer.appendChild(chartCol);
-}
+
+    return canvas;
+};
