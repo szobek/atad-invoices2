@@ -1,115 +1,73 @@
-import { setBarData, setLineData, setAmountData,setDonutData } from './datas.js'
+import { setBarData, setLineData, setAmountData, setDonutData } from './datas.js';
 
-const setBarConfig = () => {
-    return {
-        type: 'bar',
-        data: setBarData(),
-        options: {
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function (context) {
-                            let label = context.dataset.label || '';
-
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed.y !== null) {
-                                label += context.parsed.y + ' db';
-                            }
-                            return label;
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Számlák és sztornó számlák havi bontásban',
-                },
-            },
-            responsive: true,
-            scales: {
-                x: {
-                    stacked: true,
-                },
-                y: {
-                    stacked: true
-                }
-            }
-        }
-    };
-}
-
-const setLineConfig = () => {
-    return {
-        type: 'line',
-        data: setLineData(),
-        options: {
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function (context) {
-                            let label = context.dataset.label || '';
-
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed.y !== null) {
-                                label += context.parsed.y + ' db';
-                            }
-                            return label;
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Számlák és sztornó számlák havi bontásban',
-                },
-            },
-            responsive: true,
-        }
+// Helper függvények - DRY principle
+const createTooltipLabel = (context, unit) => {
+    let label = context.dataset.label || '';
+    
+    if (label) {
+        label += ': ';
     }
-}
-const setAmountConfig = () => {
-    return {
-        type: 'bar',
-        data: setAmountData(),
-        options: {
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function (context) {
-                            let label = context.dataset.label || '';
+    
+    if (context.parsed.y !== null) {
+        const value = unit === 'Ft' 
+            ? new Intl.NumberFormat('hu-HU').format(context.parsed.y)
+            : context.parsed.y;
+        label += `${value} ${unit}`;
+    }
+    
+    return label;
+};
 
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed.y !== null) {
-                                label += new Intl.NumberFormat('hu-HU').format(context.parsed.y) + ' Ft';
-                            }
-                            return label;
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Számlák és sztornó számlák összege havi bontásban',
-                },
-            },
-            responsive: true,
-            scales: {
-                x: {
-                    stacked: true,
-                },
-                y: {
-                    stacked: true
+const createBaseConfig = (type, dataFn, title, tooltipUnit = 'db', stacked = false) => ({
+    type,
+    data: dataFn(),
+    options: {
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: (context) => createTooltipLabel(context, tooltipUnit)
                 }
+            },
+            title: {
+                display: true,
+                text: title,
+            },
+        },
+        responsive: true,
+        ...(stacked && {
+            scales: {
+                x: { stacked: true },
+                y: { stacked: true }
             }
-        }
-    };
-}
+        })
+    }
+});
 
-const setDonutConfig = () => {
-    return {
+// Egyszerűsített config függvények
+const setBarConfig = () => createBaseConfig(
+    'bar',
+    setBarData,
+    'Számlák és sztornó számlák havi bontásban',
+    'db',
+    true
+);
+
+const setLineConfig = () => createBaseConfig(
+    'line',
+    setLineData,
+    'Számlák és sztornó számlák havi bontásban',
+    'db'
+);
+
+const setAmountConfig = () => createBaseConfig(
+    'bar',
+    setAmountData,
+    'Számlák és sztornó számlák összege havi bontásban',
+    'Ft',
+    true
+);
+
+const setDonutConfig = () => ({
     type: 'doughnut',
     data: setDonutData(),
     options: {
@@ -121,20 +79,6 @@ const setDonutConfig = () => {
         },
         responsive: true,
     }
-}
-}
-// const config_donut = {
-//     type: 'doughnut',
-//     data: donut_data,
-//     options: {
-//         plugins: {
-//             title: {
-//                 display: true,
-//                 text: 'Számlák összege',
-//             },
-//         },
-//         responsive: true,
-//     }
-// };
+});
 
-export { setBarConfig, setLineConfig, setAmountConfig,setDonutConfig }
+export { setBarConfig, setLineConfig, setAmountConfig, setDonutConfig };
