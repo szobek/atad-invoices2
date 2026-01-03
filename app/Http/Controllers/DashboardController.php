@@ -3,83 +3,81 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Symfony\Component\HttpFoundation\Request;
 
 class DashboardController extends Controller
 {
-    function index(Request $request, $year = null)
+    public function index(Request $request, ?int $year = null)
     {
-        if (!$year) {
-            $year = date('Y');
-        }
-        $start = Carbon::create($year)->startOfYear()->format('Y-m-d');
-        $end = Carbon::create($year)->endOfYear()->format('Y-m-d');
+        $year = $year ?? now()->year;
+        $dateRange = $this->getDateRange($year);
         
-        $dashboard_data = [];
-        
-        $stats = Invoice::select([
-            DB::raw("DATE_FORMAT(date, '%Y-%m') as honap"),
-            DB::raw("COUNT(*) as osszes_darab"),
-            DB::raw("CAST(SUM(CASE WHEN type = 'storno' THEN 1 ELSE 0 END) AS UNSIGNED) as storno_darab")
-        ])
-            ->whereBetween('date', [$start, $end])
-            ->groupBy(DB::raw("DATE_FORMAT(date, '%Y-%m')"))
-            ->orderBy('honap')
-            ->get();
-            
-        $szamla = $stats->pluck('osszes_darab')->toArray();
-        $storno = [];
-        
-        if (empty($stats->toArray())) {
-            $storno = [0];
-            $szamla = [0];
-        } else {
-            foreach ($stats as $sor) {
-                $storno[] = $sor->storno_darab;
-            }
-        }
+        // Egyetlen optimalizált query az összes adathoz
+        $stats = $this->getInvoiceStats($dateRange['start'], $dateRange['end']);
         
         $dashboard_data = [
-            "all_invoice" => array_sum($szamla),
-            "all_storno" => array_sum($storno),
-            "start_date" => Carbon::parse($start)->format('Y.m.d'),
-            "end_date" => Carbon::parse($end)->format('Y.m.d'),
+            'all_invoice' => $stats->sum('total_count'),
+            'all_storno' => $stats->sum('storno_count'),
+            'start_date' => $dateRange['start']->format('Y.m.d'),
+            'end_date' => $dateRange['end']->format('Y.m.d'),
+            'bar_chart' => $this->prepareBarChartData($stats),
+            'amount_chart_data' => $this->prepareAmountChartData($stats),
+            'donut_chart' => [
+                'invoices' => $stats->sum('normal_count'),
+                'storno' => $stats->sum('storno_count'),
+            ]
         ];
         
-        $dashboard_data["bar_chart"] = ['storno' => [], 'normal' => []];
-        foreach ($stats as $sor) {
-            $dashboard_data["bar_chart"]['storno'][] = $sor->storno_darab;
-            $dashboard_data["bar_chart"]['normal'][] = $sor->osszes_darab - $sor->storno_darab;
-        }
-        
-        if (empty($dashboard_data["bar_chart"]["storno"])) {
-            $dashboard_data["bar_chart"]["storno"] = [0];
-            $dashboard_data["bar_chart"]["normal"] = [0];
-        }
-        
-        $dashboard_data["amount_chart"] = Invoice::select([
-            DB::raw("DATE_FORMAT(date, '%Y-%m') as honap"),
-            DB::raw("CAST(SUM(CASE WHEN type = 'storno' THEN amount ELSE 0 END) AS DECIMAL(10,2)) as storno_amount"),
-            DB::raw("CAST(SUM(CASE WHEN type = 'invoice' THEN amount ELSE 0 END) AS DECIMAL(10,2)) as normal_amount")
-        ])
-            ->whereBetween('date', [$start, $end])
-            ->groupBy(DB::raw("DATE_FORMAT(date, '%Y-%m')"))
-            ->orderBy('honap')
-            ->get()->toArray();
-            
-        $dashboard_data["amount_chart_data"] = ['storno' => [], 'normal' => []];
-        foreach ($dashboard_data["amount_chart"] as $sor) {
-            $dashboard_data["amount_chart_data"]['storno'][] = $sor['storno_amount'];
-            $dashboard_data["amount_chart_data"]['normal'][] = $sor['normal_amount'];
-        }
-        
-        $dashboard_data["donut_chart"] = [
-            'invoices' => Invoice::whereBetween('date', [$start, $end])->where('type', 'invoice')->count(),
-            'storno' => Invoice::whereBetween('date', [$start, $end])->where('type', 'storno')->count(),
-        ];
-       
         return view('pages.dashboard', compact('dashboard_data', 'year'));
+    }
+    
+    private function getDateRange(int $year): array
+    {
+        return [
+            'start' => Carbon::create($year)->startOfYear(),
+            'end' => Carbon::create($year)->endOfYear(),
+        ];
+    }
+    
+    private function getInvoiceStats(Carbon $start, Carbon $end)
+    {
+        return Invoice::select([
+                DB::raw("DATE_FORMAT(date, '%Y-%m') as month"),
+                DB::raw("COUNT(*) as total_count"),
+                DB::raw("SUM(CASE WHEN type = 'storno' THEN 1 ELSE 0 END) as storno_count"),
+                DB::raw("SUM(CASE WHEN type = 'invoice' THEN 1 ELSE 0 END) as normal_count"),
+                DB::raw("SUM(CASE WHEN type = 'storno' THEN amount ELSE 0 END) as storno_amount"),
+                DB::raw("SUM(CASE WHEN type = 'invoice' THEN amount ELSE 0 END) as normal_amount")
+            ])
+            ->whereBetween('date', [$start->format('Y-m-d'), $end->format('Y-m-d')])
+            ->groupBy(DB::raw("DATE_FORMAT(date, '%Y-%m')"))
+            ->orderBy('month')
+            ->get();
+    }
+    
+    private function prepareBarChartData($stats): array
+    {
+        if ($stats->isEmpty()) {
+            return ['storno' => [0], 'normal' => [0]];
+        }
+        
+        return [
+            'storno' => $stats->pluck('storno_count')->toArray(),
+            'normal' => $stats->pluck('normal_count')->toArray(),
+        ];
+    }
+    
+    private function prepareAmountChartData($stats): array
+    {
+        if ($stats->isEmpty()) {
+            return ['storno' => [0], 'normal' => [0]];
+        }
+        
+        return [
+            'storno' => $stats->pluck('storno_amount')->toArray(),
+            'normal' => $stats->pluck('normal_amount')->toArray(),
+        ];
     }
 }
